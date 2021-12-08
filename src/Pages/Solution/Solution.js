@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, FloatingLabel, Form, Row, Table } from 'react-bootstrap';
+import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 import './Solution.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -49,9 +49,12 @@ const Solution = () => {
                     </Form>
                     <Form>
                     <Row className="mb-3">
-                        <FloatingLabel controlId="floatingTextarea" label="Comments" className="mb-3 px-2 mx-1">
+                        {/* <FloatingLabel controlId="floatingTextarea" label="Comments" className="mb-3 px-2 mx-1">
                             <Form.Control as="textarea" placeholder="Leave a comment here" />
-                        </FloatingLabel>
+                        </FloatingLabel> */}
+                        <div class="mb-2">
+                        <textarea class="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
                         <Form.Group as={Col} controlId="formGridWaterArea">
                         <Form.Control type="number" placeholder="Water Area"onChange={(e)=>setWaterArea(e.target.value)}/>
                         </Form.Group>
