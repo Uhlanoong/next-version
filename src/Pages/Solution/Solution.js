@@ -58,23 +58,24 @@ const Solution = () => {
                     <Row>
                         <Col>
                        <Form.Group className="mb-3">
-
-                        <Form.Select size = "sm">
-                            <option value="1">Acre</option>
-                            <option value="2">Bigha</option>
-                            <option value="3"></option>
-                        </Form.Select>
-                        
+                       <Autocomplete
+                        disablePortal
+                        id=""
+                        options={unit}
+                        sx={{ width: 400}}
+                        renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
+                        />
                         </Form.Group>
                         </Col>
                         <Col>
                         <Form.Group className="mb-3">
-                        
-                        <Form.Select size = "sm">
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                        </Form.Select>
+                        <Autocomplete
+                        disablePortal
+                        id=""
+                        options={unit}
+                        sx={{ width: 400}}
+                        renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
+                        />
                         </Form.Group>
                         </Col>
                     </Row>
@@ -182,7 +183,7 @@ const Solution = () => {
                     <Col sm = {3} className = "text-start">
                     <p>The Water Volume is : {volume} m<sup>3</sup>
                     <br/>
-                    O<sub>2</sub> Production (tentitive): {production}
+                    O<sub>2</sub> Production: {production} mg/hr
                     <br/>
                     Total O<sub>2</sub> demand:
                     <br/>
@@ -228,5 +229,16 @@ const species = [
     { label: 'Others' }
     
   ];
+
+const unit = [
+    {label: 'acre'},
+    {label: 'bigha'},
+    {label: 'katha'},
+    {label: 'hectare'},
+    {label: 'kani'},
+    {label: 'kora'},
+    {label: 'gonda'},
+    {label: 'square feet'},
+]
 
 export default Solution;
