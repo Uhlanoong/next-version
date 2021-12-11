@@ -7,39 +7,58 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 
 const Solution = () => {
+    // Output formula
     const [waterArea, setWaterArea] = useState(0);
     const [waterDepth, setWaterDepth] = useState(0);
     const [volume, setVolume] = useState('')
     const [production, setProduction] = useState('')
 
+    //Table formula
+    const [totalPc, setTotalPc] = useState(null);
+    const [stockingDensity, setStockingDensity] = useState(null);
+    const [presentSize, setPresentSize] = useState(null)
+    const [totalWeight, setTotalWeight] = useState(null)
+    const [presentBiomass, setPresentBiomass] = useState(null);
+    
+    const handlePresentSize = (e)=>{
+        setPresentSize(e.target.value)
+    }
+    const handleTotalWeight = (e)=>{
+        setTotalWeight(e.target.value)
+    }
+    const handleTotalPc = (e)=>{
+        setTotalPc(e.target.value);
+    }
+    const handleStockingDensity = (e)=>{
+        setStockingDensity(e.target.value);
+    }
+    const handlePresentBiomass = (e)=>{
+        setPresentBiomass(e.target.value)
+    }
+    
     // ------Converter-------//
     const [acre, setAcre] = useState(null);
+    const [decimal, setDecimal] = useState(null);
     const handleAcreChange = (e)=>{
-        setAcre(e.target.value)
+        setAcre(e.target.value);
+        console.log(e.target.value);
+    }
+    const handleDecimalChange = (e)=>{
+        setDecimal(e.target.value)
     }
     useEffect(() => {
-      let newAcre = {handleAcreChange} * 100
+      let newAcre = {handleAcreChange} / 100
+      let newDecimal = {handleDecimalChange} * 100
       setAcre(newAcre);
-    }, [acre]);
+      setDecimal(newDecimal);
+    }, [acre,decimal]);
     // const [currentdate, setCurrentDate] = useState(new Date().toLocaleDateString())
-    let calculate_age = (dob) => {
-        var today = new Date();
-        var birthDate = new Date(dob);
-        var age_now = today.getFullYear() - birthDate.getFullYear();
-        var m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
-        {
-            age_now--;
-        }
-        return age_now;
-      }  
-    // const calculate_age = (dob) => {
-    //     const birthDate = new Date(dob); 
-    //     const difference = Date.now() - birthDate.getTime();
-    //     const age = new Date(difference);
-      
-    //     return Math.abs(age.getUTCFullYear() - 1970);
-    //   }
+    function getAge(d1, d2){
+        d2 = d2 || new Date();
+        var diff = d2.getTime() - d1.getTime();
+        return Math.floor(diff / (1000 *60 * 60 * 24 * 365.25));
+    }
+    getAge(new Date(1978, 10, 3));
 
     useEffect(()=>{
         let cubic = parseFloat(28.32).toFixed(2)
@@ -55,6 +74,21 @@ const Solution = () => {
         let oxygenProduction = newVolume* range
         setProduction(oxygenProduction)
     }, [waterArea, waterDepth, production]);
+
+    useEffect(() => {
+       let newStockingDensity = totalPc / waterArea
+       setStockingDensity(newStockingDensity)
+    }, [totalPc, waterArea]);
+
+    useEffect(() => {
+        let newTotalWeight = (totalPc * presentSize) /1000
+        setTotalWeight(newTotalWeight)
+    }, [totalPc, presentSize]);
+
+    useEffect(() => {
+        let newPresentBiomass = totalWeight /waterArea
+        setPresentBiomass(newPresentBiomass)
+    }, [totalWeight, waterArea]);
    
     return (
         <div className = "my-2">
@@ -72,7 +106,7 @@ const Solution = () => {
                         sx={{ width: 400}}
                         renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
                         />
-                        <Form.Control type = "number" placeholder = ""/>
+                        <Form.Control type = "number" placeholder = "" onChange={handleAcreChange}/>
                         </Form.Group>
                         </Col>
                         <Col>
@@ -84,7 +118,7 @@ const Solution = () => {
                         sx={{ width: 405}}
                         renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
                         />
-                        <Form.Control type = "number" placeholder = "" />
+                        <Form.Control type = "number" placeholder = "" onChange={handleDecimalChange} value={acre}/>
                         </Form.Group>
                         </Col>
                     </Row>
@@ -114,12 +148,12 @@ const Solution = () => {
 
                     <Row className="mb-3">
 
-                        <Form.Group as={Col} controlId="formCurrentDate">
-                        <Form.Control type="date" placeholder="Currrent Date"/>
+                        <Form.Group as={Col} controlId="formStockingDate">
+                        <Form.Control type="date" placeholder="Stocking Date"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formCulturePeriod">
-                        <Form.Control type = "number" placeholder = "Culture Period" onChange={calculate_age()}/>
+                        <Form.Control type = "number" placeholder = "Culture Period" value={getAge}/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
                         <Form.Control type = "number" placeholder = "Stocking Quantity" />
@@ -139,7 +173,7 @@ const Solution = () => {
                         <th>Stk Dty</th>
                         <th>Ttl Wt(kg)</th>
                         <th>Hvst Size</th>
-                        <th>Hvst Biomass</th>
+                        <th>Psnt Biomass</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -154,13 +188,14 @@ const Solution = () => {
                         renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
                         />
                         </td>
-                        <td><input type = "number" maxLength = "5" size = "5" min="1" max="5"></input></td>
+                        <td><input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc}></input></td>
                         <td><input type = "number" style={{width: "80px"}} ></input></td>
-                        <td><input type = "number" style={{width: "80px"}}></input></td>
-                        <td><input type = "number" min="1" max="5"></input></td>
-                        <td><input type = "number" style={{width: "70px"}}></input></td>
+                        <td><input type = "number" style={{width: "80px"}} onChange={handlePresentSize}></input></td>
+                        <td><input type = "number" min="1" max="5" onChange= {handleStockingDensity} value={stockingDensity}></input></td>
+                        <td><input type = "number" style={{width: "70px"}}
+                        onChange={handleTotalWeight} value={totalWeight}></input></td>
                         <td><input type = "number" style={{width: "80px"}} ></input></td>
-                        <td><input type = "number" style={{width: "80px"}}></input></td>
+                        <td><input type = "number" style={{width: "80px"}}onChange={handlePresentBiomass} value={presentBiomass}></input></td>
                         </tr>
                         <tr>
                         <td>2</td>
@@ -193,7 +228,7 @@ const Solution = () => {
                     <br/>
                     O<sub>2</sub> Production: {production} mg/hr
                     <br/>
-                    Total O<sub>2</sub> demand: 
+                    Total O<sub>2</sub> demand:
                     <br/>
                     Total O<sub>2</sub> demand harvest size:
                     <br/>
@@ -247,6 +282,8 @@ const unit = [
     {label: 'kora'},
     {label: 'gonda'},
     {label: 'square feet'},
+    {label: 'decimal'},
+    {label: 'square meter'},
 ]
 
 export default Solution;
