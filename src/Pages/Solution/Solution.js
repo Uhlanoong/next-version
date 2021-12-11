@@ -11,28 +11,35 @@ const Solution = () => {
     const [waterDepth, setWaterDepth] = useState(0);
     const [volume, setVolume] = useState('')
     const [production, setProduction] = useState('')
-    // const range = 1.45830299;
-    // const oxygenPd = {volume}* range
-    // const range = parseFloat(1.45830299).toFixed(2);
-    // const oxygenPd = newVolume*range
 
+    // ------Converter-------//
+    const [acre, setAcre] = useState(null);
+    const handleAcreChange = (e)=>{
+        setAcre(e.target.value)
+    }
+    useEffect(() => {
+      let newAcre = {handleAcreChange} * 100
+      setAcre(newAcre);
+    }, [acre]);
     // const [currentdate, setCurrentDate] = useState(new Date().toLocaleDateString())
-    // let calculate_age = (dob) => {
-    //     var today = new Date();
-    //     var birthDate = new Date(dob);
-    //     var age_now = today.getFullYear() - birthDate.getFullYear();
-    //     var m = today.getMonth() - birthDate.getMonth();
-    //     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
-    //     {
-    //         age_now--;
-    //     }
-    //     return age_now;
-    //   }  
-    // const [optionSelected, setSelectedOptions] = useState([]);
+    let calculate_age = (dob) => {
+        var today = new Date();
+        var birthDate = new Date(dob);
+        var age_now = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+        {
+            age_now--;
+        }
+        return age_now;
+      }  
+    // const calculate_age = (dob) => {
+    //     const birthDate = new Date(dob); 
+    //     const difference = Date.now() - birthDate.getTime();
+    //     const age = new Date(difference);
       
-    // const handleChange = (e) => {
-    //       setSelectedOptions(e.target.value);
-    // };
+    //     return Math.abs(age.getUTCFullYear() - 1970);
+    //   }
 
     useEffect(()=>{
         let cubic = parseFloat(28.32).toFixed(2)
@@ -41,8 +48,8 @@ const Solution = () => {
     }, [waterArea, waterDepth])
     
     useEffect(() => {
-        let range = parseFloat(1.45830299).toFixed(2);
-        let cubic = parseFloat(28.32).toFixed(2)
+        let range = parseFloat("1.45830299").toFixed(2);
+        let cubic = parseFloat("28.32").toFixed(2)
         let newVolume = waterArea * waterDepth * cubic
         setVolume(newVolume)
         let oxygenProduction = newVolume* range
@@ -56,7 +63,7 @@ const Solution = () => {
                     <Col sm = {9}>
                     <Form>
                     <Row>
-                        <Col>
+                    <Col>
                        <Form.Group className="mb-3">
                        <Autocomplete
                         disablePortal
@@ -65,6 +72,7 @@ const Solution = () => {
                         sx={{ width: 400}}
                         renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
                         />
+                        <Form.Control type = "number" placeholder = ""/>
                         </Form.Group>
                         </Col>
                         <Col>
@@ -73,9 +81,10 @@ const Solution = () => {
                         disablePortal
                         id=""
                         options={unit}
-                        sx={{ width: 400}}
+                        sx={{ width: 405}}
                         renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
                         />
+                        <Form.Control type = "number" placeholder = "" />
                         </Form.Group>
                         </Col>
                     </Row>
@@ -86,7 +95,7 @@ const Solution = () => {
                         <textarea class="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1"></textarea>
                         </div>
                         <Form.Group as={Col} controlId="formGridWaterArea">
-                        <Form.Control type="number" placeholder="Water Area"onChange={(e)=>setWaterArea(e.target.value)}/>
+                        <Form.Control type="number" placeholder="Water Area" onChange={(e)=>setWaterArea(e.target.value)}/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridWaterDepth">
                         <Form.Control type="number" placeholder="Water Depth" onChange={(e)=>setWaterDepth(e.target.value)} />
@@ -106,11 +115,11 @@ const Solution = () => {
                     <Row className="mb-3">
 
                         <Form.Group as={Col} controlId="formCurrentDate">
-                        <Form.Control type="date" placeholder="Currrent Date" id = "date 2" />
+                        <Form.Control type="date" placeholder="Currrent Date"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formCulturePeriod">
-                        <Form.Control type = "age" placeholder = "Culture Period" />
+                        <Form.Control type = "number" placeholder = "Culture Period" onChange={calculate_age()}/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
                         <Form.Control type = "number" placeholder = "Stocking Quantity" />
@@ -128,7 +137,7 @@ const Solution = () => {
                         <th>Stk Size(gm)</th>
                         <th>Psnt Size(gm)</th>
                         <th>Stk Dty</th>
-                        <th>Total Wt(kg)</th>
+                        <th>Ttl Wt(kg)</th>
                         <th>Hvst Size</th>
                         <th>Hvst Biomass</th>
                         </tr>
@@ -144,15 +153,14 @@ const Solution = () => {
                         sx={{ width: 130}}
                         renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
                         />
-                        {/* <input type = "text" placeholder ="Species" size = "9" value = {optionSelected} onChange={handleChange} options={species}></input> */}
                         </td>
                         <td><input type = "number" maxLength = "5" size = "5" min="1" max="5"></input></td>
-                        <td><input type = "number" min="1" max="5" ></input></td>
+                        <td><input type = "number" style={{width: "80px"}} ></input></td>
+                        <td><input type = "number" style={{width: "80px"}}></input></td>
                         <td><input type = "number" min="1" max="5"></input></td>
-                        <td><input type = "number" min="1" max="5"></input></td>
-                        <td><input type = "number"min="1" max="6"></input></td>
-                        <td><input type = "number" min="1" max="6"></input></td>
-                        <td><input type = "number" min="1" max="5"></input></td>
+                        <td><input type = "number" style={{width: "70px"}}></input></td>
+                        <td><input type = "number" style={{width: "80px"}} ></input></td>
+                        <td><input type = "number" style={{width: "80px"}}></input></td>
                         </tr>
                         <tr>
                         <td>2</td>
@@ -185,7 +193,7 @@ const Solution = () => {
                     <br/>
                     O<sub>2</sub> Production: {production} mg/hr
                     <br/>
-                    Total O<sub>2</sub> demand:
+                    Total O<sub>2</sub> demand: 
                     <br/>
                     Total O<sub>2</sub> demand harvest size:
                     <br/>
