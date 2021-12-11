@@ -10,8 +10,12 @@ const Solution = () => {
     const [waterArea, setWaterArea] = useState(0);
     const [waterDepth, setWaterDepth] = useState(0);
     const [volume, setVolume] = useState('')
+    const [production, setProduction] = useState('')
     // const range = 1.45830299;
     // const oxygenPd = {volume}* range
+    // const range = parseFloat(1.45830299).toFixed(2);
+    // const oxygenPd = newVolume*range
+
     // const [currentdate, setCurrentDate] = useState(new Date().toLocaleDateString())
     // let calculate_age = (dob) => {
     //     var today = new Date();
@@ -36,6 +40,14 @@ const Solution = () => {
         setVolume(newVolume)
     }, [waterArea, waterDepth])
     
+    useEffect(() => {
+        let range = parseFloat(1.45830299).toFixed(2);
+        let cubic = parseFloat(28.32).toFixed(2)
+        let newVolume = waterArea * waterDepth * cubic
+        setVolume(newVolume)
+        let oxygenProduction = newVolume* range
+        setProduction(oxygenProduction)
+    }, [waterArea, waterDepth, production]);
    
     return (
         <div className = "my-2">
@@ -168,9 +180,9 @@ const Solution = () => {
                     </Col>
 
                     <Col sm = {3} className = "text-start">
-                    <p>The Water Volume is : {volume} cm<sup>3</sup>
+                    <p>The Water Volume is : {volume} m<sup>3</sup>
                     <br/>
-                    O<sub>2</sub> Production (tentitive):
+                    O<sub>2</sub> Production (tentitive): {production}
                     <br/>
                     Total O<sub>2</sub> demand:
                     <br/>
