@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import './Solution.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+
 
 
 const Solution = () => {
     const [waterArea, setWaterArea] = useState(0);
     const [waterDepth, setWaterDepth] = useState(0);
     const [volume, setVolume] = useState('')
-    
-    const [currentdate, setCurrentDate] = useState(new Date().toLocaleDateString())
+    // const range = 1.45830299;
+    // const oxygenPd = {volume}* range
+    // const [currentdate, setCurrentDate] = useState(new Date().toLocaleDateString())
+    // let calculate_age = (dob) => {
+    //     var today = new Date();
+    //     var birthDate = new Date(dob);
+    //     var age_now = today.getFullYear() - birthDate.getFullYear();
+    //     var m = today.getMonth() - birthDate.getMonth();
+    //     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    //     {
+    //         age_now--;
+    //     }
+    //     return age_now;
+    //   }  
+    // const [optionSelected, setSelectedOptions] = useState([]);
+      
+    // const handleChange = (e) => {
+    //       setSelectedOptions(e.target.value);
+    // };
 
     useEffect(()=>{
-        let newVolume = waterArea * waterDepth
+        let cubic = parseFloat(28.32).toFixed(2)
+        let newVolume = waterArea * waterDepth * cubic
         setVolume(newVolume)
     }, [waterArea, waterDepth])
     
@@ -38,10 +57,11 @@ const Solution = () => {
                         </Col>
                         <Col>
                         <Form.Group className="mb-3">
+                        
                         <Form.Select size = "sm">
-                            <option value="1">Decimal</option>
-                            <option value="2">Katha</option>
-                            <option value="3">Chatak</option>
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
                         </Form.Select>
                         </Form.Group>
                         </Col>
@@ -49,9 +69,6 @@ const Solution = () => {
                     </Form>
                     <Form>
                     <Row className="mb-3">
-                        {/* <FloatingLabel controlId="floatingTextarea" label="Comments" className="mb-3 px-2 mx-1">
-                            <Form.Control as="textarea" placeholder="Leave a comment here" />
-                        </FloatingLabel> */}
                         <div class="mb-2">
                         <textarea class="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1"></textarea>
                         </div>
@@ -61,58 +78,34 @@ const Solution = () => {
                         <Form.Group as={Col} controlId="formGridWaterDepth">
                         <Form.Control type="number" placeholder="Water Depth" onChange={(e)=>setWaterDepth(e.target.value)} />
                         </Form.Group>
+                        
                         <Form.Group as={Col} controlId="formGridProblembatic Species">
                         <Autocomplete
                         disablePortal
                         id=""
                         options={species}
-                        sx={{ width: 240, mx:2, px:3}}
+                        sx={{ width: 260}}
                         renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
                         />
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="formStockingDate">
-                        <Form.Control type="date" placeholder="Stocking Date" />
                         </Form.Group>
                     </Row>
 
                     <Row className="mb-3">
+
                         <Form.Group as={Col} controlId="formCurrentDate">
-                        <Form.Control type="date" placeholder="Currrent Date" value = {currentdate} onChange={(e) => setCurrentDate()} />
+                        <Form.Control type="date" placeholder="Currrent Date" id = "date 2" />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formCulturePeriod">
                         <Form.Control type = "age" placeholder = "Culture Period" />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
-                        <Form.Control type = "number" placeholder = "Stocking Qty" />
+                        <Form.Control type = "number" placeholder = "Stocking Quantity" />
                         </Form.Group>
+                        
                     </Row>
                     </Form>
                      
-                    {/* <div>
-                    <Form>
-                        <Row>
-                        <Form.Group as={Col} controlId="formGridProblembatic Species">
-                        <Autocomplete
-                        disablePortal
-                        id=""
-                        options={species}
-                        sx={{ width: 240, mx:2, px:3}}
-                        renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
-                        />
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="formTotalPc">
-                        <Form.Control type = "number" placeholder = "Total Pc"/>
-                        </Form.Group>
-                        <Form.Group as={Col} max-length = "5">
-                        <Form.Control type = "number" placeholder = "Stocking Size"/>
-                        </Form.Group>
-                        </Row>
-                    </Form>
-                    </div> */}
-
-                    
-                    <br/>
                     <Table striped bordered hover size="sm" responsive>
                     <thead>
                         <tr>
@@ -123,8 +116,6 @@ const Solution = () => {
                         <th>Psnt Size(gm)</th>
                         <th>Stk Dty</th>
                         <th>Total Wt(kg)</th>
-                        <th>Feeding rate(%)</th>
-                        <th>Feed Req.(kg)</th>
                         <th>Hvst Size</th>
                         <th>Hvst Biomass</th>
                         </tr>
@@ -133,7 +124,14 @@ const Solution = () => {
                         <tr>
                         <td>1</td>
                         <td>
-                        <input type = "text" placeholder ="Species" size = "9"></input>
+                        <Autocomplete
+                        disablePortal
+                        id=""
+                        options={species}
+                        sx={{ width: 130}}
+                        renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
+                        />
+                        {/* <input type = "text" placeholder ="Species" size = "9" value = {optionSelected} onChange={handleChange} options={species}></input> */}
                         </td>
                         <td><input type = "number" maxLength = "5" size = "5" min="1" max="5"></input></td>
                         <td><input type = "number" min="1" max="5" ></input></td>
@@ -141,14 +139,10 @@ const Solution = () => {
                         <td><input type = "number" min="1" max="5"></input></td>
                         <td><input type = "number"min="1" max="6"></input></td>
                         <td><input type = "number" min="1" max="6"></input></td>
-                        <td><input type = "number" min="1" max="6"></input></td>
-                        <td><input type = "number" min="1" max="6"></input></td>
-                        <td><input type = "number" min="1" max="6"></input></td>
+                        <td><input type = "number" min="1" max="5"></input></td>
                         </tr>
                         <tr>
                         <td>2</td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -168,15 +162,13 @@ const Solution = () => {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
                         </tr>
                     </tbody>
                     </Table>
-
                     </Col>
+
                     <Col sm = {3} className = "text-start">
-                    <p>The Water Volume is : {volume}
+                    <p>The Water Volume is : {volume} cm<sup>3</sup>
                     <br/>
                     O<sub>2</sub> Production (tentitive):
                     <br/>
@@ -193,6 +185,7 @@ const Solution = () => {
                     Solution:
                     </p>
                     </Col>
+                    <Button type = "submit" variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button>
                 </Row>
             </Container>
         </div>
@@ -206,14 +199,14 @@ const species = [
     { label: 'Mrigel' },
     { label: 'Koi' },
     { label: 'Catla' },
-    { label: 'Silver Carp' },
+    { label: 'Silver Carp'},
     { label: 'Carpio' },
-    { label: 'Grass Carp' },
     { label: 'Big Head' },
     { label: 'Black Carp' },
     { label: 'Kali Baus' },
     { label: 'Pabda' },
     { label: 'Gulsha' },
+    { label: 'Grass Carp'},
     { label: 'Shing' },
     { label: 'Magur' },
     { label: 'Shol' },
