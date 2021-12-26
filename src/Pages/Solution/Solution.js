@@ -3,8 +3,7 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import './Solution.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
-
+import '../Stackoverflow/Stackoverflow';
 
 const Solution = () => {
     // Output formula
@@ -17,12 +16,28 @@ const Solution = () => {
     const [totalPc, setTotalPc] = useState(null);
     const [stockingDensity, setStockingDensity] = useState(null);
     const [presentSize, setPresentSize] = useState(null)
-    const [totalWeight, setTotalWeight] = useState(null)
-    const [presentBiomass, setPresentBiomass] = useState(null);
+    // const [stockingDate, setStockingDate] = useState({
+    //     date: "",
+    //     birthday: "",
+    //     showResults: false,
+    // })
+
+    // const CalculateAge = () =>{
+    //     setStockingDate({birthday: stockingDate.date, showResults: true});
+    // }
+    // const changeHandler = (e)=>{
+    //     setStockingDate({date: e.target.value})
+    // }
+    // const [harvestSize, setHarvestSize] = useState(null)
+    const [totalWeight, setTotalWeight] = useState('')
+    const [presentBiomass, setPresentBiomass] = useState('');
     
     const handlePresentSize = (e)=>{
         setPresentSize(e.target.value)
     }
+    // const handleHarvestSize = (e)=>{
+    //     setHarvestSize(e.target.value)
+    // }
     const handleTotalWeight = (e)=>{
         setTotalWeight(e.target.value)
     }
@@ -35,31 +50,7 @@ const Solution = () => {
     const handlePresentBiomass = (e)=>{
         setPresentBiomass(e.target.value)
     }
-    
-    // ------Converter-------//
-    const [acre, setAcre] = useState(null);
-    const [decimal, setDecimal] = useState(null);
-    const handleAcreChange = (e)=>{
-        setAcre(e.target.value);
-        console.log(e.target.value);
-    }
-    const handleDecimalChange = (e)=>{
-        setDecimal(e.target.value)
-    }
-    useEffect(() => {
-      let newAcre = {handleAcreChange} / 100
-      let newDecimal = {handleDecimalChange} * 100
-      setAcre(newAcre);
-      setDecimal(newDecimal);
-    }, [acre,decimal]);
     // const [currentdate, setCurrentDate] = useState(new Date().toLocaleDateString())
-    function getAge(d1, d2){
-        d2 = d2 || new Date();
-        var diff = d2.getTime() - d1.getTime();
-        return Math.floor(diff / (1000 *60 * 60 * 24 * 365.25));
-    }
-    getAge(new Date(1978, 10, 3));
-
     useEffect(()=>{
         let cubic = parseFloat(28.32).toFixed(2)
         let newVolume = waterArea * waterDepth * cubic
@@ -83,50 +74,32 @@ const Solution = () => {
     useEffect(() => {
         let newTotalWeight = (totalPc * presentSize) /1000
         setTotalWeight(newTotalWeight)
+        // let harvestTotalWeight = (totalPc * harvestSize) /1000
+        // setTotalWeight(harvestTotalWeight)
     }, [totalPc, presentSize]);
 
     useEffect(() => {
         let newPresentBiomass = totalWeight /waterArea
         setPresentBiomass(newPresentBiomass)
     }, [totalWeight, waterArea]);
-   
+
+    // useEffect(() => {
+    //     let fish = 3000
+    //     let newOxygenDemand = fish * totalWeight
+    //     setOxygenDemand(newOxygenDemand)
+      
+    // }, [totalWeight]);
+
+    
     return (
         <div className = "my-2">
             <Container>
                 <Row>
                     <Col sm = {9}>
                     <Form>
-                    <Row>
-                    <Col>
-                       <Form.Group className="mb-3">
-                       <Autocomplete
-                        disablePortal
-                        id=""
-                        options={unit}
-                        sx={{ width: 400}}
-                        renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
-                        />
-                        <Form.Control type = "number" placeholder = "" onChange={handleAcreChange}/>
-                        </Form.Group>
-                        </Col>
-                        <Col>
-                        <Form.Group className="mb-3">
-                        <Autocomplete
-                        disablePortal
-                        id=""
-                        options={unit}
-                        sx={{ width: 405}}
-                        renderInput={(params) => <TextField {...params} label="Select Unit" size = "small"/>}
-                        />
-                        <Form.Control type = "number" placeholder = "" onChange={handleDecimalChange} value={acre}/>
-                        </Form.Group>
-                        </Col>
-                    </Row>
-                    </Form>
-                    <Form>
                     <Row className="mb-3">
-                        <div class="mb-2">
-                        <textarea class="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        <div className="mb-2">
+                        <textarea className="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1"></textarea>
                         </div>
                         <Form.Group as={Col} controlId="formGridWaterArea">
                         <Form.Control type="number" placeholder="Water Area" onChange={(e)=>setWaterArea(e.target.value)}/>
@@ -139,7 +112,7 @@ const Solution = () => {
                         <Autocomplete
                         disablePortal
                         id=""
-                        options={species}
+                        options={fish}
                         sx={{ width: 260}}
                         renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
                         />
@@ -153,7 +126,7 @@ const Solution = () => {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formCulturePeriod">
-                        <Form.Control type = "number" placeholder = "Culture Period" value={getAge}/>
+                        <Form.Control type = "number" placeholder = "Age"/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
                         <Form.Control type = "number" placeholder = "Stocking Quantity" />
@@ -161,7 +134,7 @@ const Solution = () => {
                         
                     </Row>
                     </Form>
-                     
+                    
                     <Table striped bordered hover size="sm" responsive>
                     <thead>
                         <tr>
@@ -183,10 +156,17 @@ const Solution = () => {
                         <Autocomplete
                         disablePortal
                         id=""
-                        options={species}
+                        options={fish}
                         sx={{ width: 130}}
                         renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
                         />
+                        {/* <select onChange={handleChange} value={species}>
+                        {fish.map(item => (
+                            <option key={item.value} value={item.value}>
+                            {item.label}
+                            </option>
+                        ))}
+                        </select> */}
                         </td>
                         <td><input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc}></input></td>
                         <td><input type = "number" style={{width: "80px"}} ></input></td>
@@ -247,20 +227,44 @@ const Solution = () => {
         </div>
     );
 };
-const species = [
+const fish = [
   
-    { label: 'Tilapia' },
-    { label: 'Pangasius' },
-    { label: 'Rui' },
-    { label: 'Mrigel' },
-    { label: 'Koi' },
-    { label: 'Catla' },
-    { label: 'Silver Carp'},
-    { label: 'Carpio' },
-    { label: 'Big Head' },
-    { label: 'Black Carp' },
-    { label: 'Kali Baus' },
-    { label: 'Pabda' },
+    { label: 'Tilapia',
+      value: 1750
+    },
+    { label: 'Pangasius',
+    value: 350,
+    },
+    { label: 'Rui',
+    value: 3000,
+    },
+    { label: 'Mrigel',
+    value: 3000, 
+    },
+    { label: 'Koi',
+    value: 750, 
+    },
+    { label: 'Catla',
+    value: 3000, 
+    },
+    { label: 'Silver Carp',
+    value: 3000,
+    },
+    { label: 'Carpio',
+    value: 3000,
+    },
+    { label: 'Big Head',
+    value: 3000,
+    },
+    { label: 'Black Carp',
+    value: 3000,
+    },
+    { label: 'Kali Baus',
+    value: 3000, 
+    },
+    { label: 'Pabda', 
+    value: 3500
+    },
     { label: 'Gulsha' },
     { label: 'Grass Carp'},
     { label: 'Shing' },
@@ -273,17 +277,6 @@ const species = [
     
   ];
 
-const unit = [
-    {label: 'acre'},
-    {label: 'bigha'},
-    {label: 'katha'},
-    {label: 'hectare'},
-    {label: 'kani'},
-    {label: 'kora'},
-    {label: 'gonda'},
-    {label: 'square feet'},
-    {label: 'decimal'},
-    {label: 'square meter'},
-]
+
 
 export default Solution;
