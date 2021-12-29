@@ -1,3 +1,63 @@
+// import React, { useCallback, useState } from "react";
+
+// function Stackoverflow() {
+//   const [options, setOptions] = useState([
+//     {
+//       name: "Select…",
+//       value: null,
+//     },
+//     {
+//       name: "Rui",
+//       value: 3000,
+//     },
+//     {
+//       name: "Catla",
+//       value: 3000,
+//     },
+//     {
+//       name: "Carpio",
+//       value: 3000,
+//     },
+//     {
+//       name: "Tilapia",
+//       value: 1750,
+//     },
+//     {
+//       name: "Mrigel",
+//       value: 3000,
+//     },
+//     {
+//       name: "Pabda",
+//       value: 3500,
+//     },
+//     {
+//       name: "Koi",
+//       value: 750,
+//     },
+//   ]);
+//   const [value, setValue] = useState("?");
+
+//   const handleChange = useCallback((e) => {
+//     setValue(e.target.value);
+//   }, []);
+
+//   return (
+//     <>
+//       <select onChange={handleChange} value={value}>
+//         {options.map((item) => (
+//           <option key={item.value} value={item.value}>
+//             {item.name}
+//           </option>
+//         ))}
+//       </select>
+//       <p>Oxygen Demand: {value}</p>
+//     </>
+//   );
+// }
+
+// export default Stackoverflow;
+
+
 import React, { PureComponent, Fragment } from 'react';
 
 class Stackoverflow extends PureComponent {

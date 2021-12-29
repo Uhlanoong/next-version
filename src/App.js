@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Age from './Pages/Age/Age';
 import Calculation from './Pages/Calculation/Calculation';
 import Data from './Pages/Data/Data';
 import Menubar from './Pages/Menubar/Menubar';
@@ -20,6 +21,7 @@ function App() {
           <Route path = "/data" element = {<Data/>}/>
           <Route path = "/stackoverflow" element = {<Stackoverflow/>}/>
           <Route path = "/calculation" element = {<Calculation/>}/>
+          <Route path = "/age" element = {<Age/>}/>
         </Routes>
       </BrowserRouter>
     </div>
