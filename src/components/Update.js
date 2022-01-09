@@ -127,7 +127,6 @@ const Update = (props) => {
             })
       }
       const updateFeed =()=>{
-        
         const url = `http://localhost:5000/feed/${tempId}/${tempFishType}/${tempFeedType}/${tempBodyWeight}/${tempFeedRate}/${tempFrequency}`;
           fetch(url, {
               method: 'PUT'

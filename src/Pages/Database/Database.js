@@ -4,7 +4,7 @@ import Update from '../../components/Update';
 const Database = () => {
     const [species, setSpecies] = useState([])
     useEffect(()=> {
-        fetch('http://localhost:5000/database')
+        fetch('http://localhost:5000/species')
         .then(res=> res.json())
         .then(data =>setSpecies(data))
     },[]);
