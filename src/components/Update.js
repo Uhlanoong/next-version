@@ -10,6 +10,7 @@ const Update = (props) => {
     const [tempAge, setTempAge] = useState(0);
     const [tempBodyWeight, setTempBodyWeight] = useState(0);
     const [tempFeedType, setTempFeedType] = useState('');
+    const [tempFeedRate, setTempFeedRate] = useState(0);
     const [tempFrequency, setTempFrequency] = useState(0);
     const [tempId, setTempId] = useState('')
 
@@ -54,8 +55,7 @@ const Update = (props) => {
                 }
             })
         } 
-  
-      }
+    }
     //Delete a data for Daily Growth
     const handleDeleteGrowthData = id =>{
         const proceed = window.confirm('Are you sure, you want to delete?')
@@ -73,7 +73,8 @@ const Update = (props) => {
                     window.location.reload()
                 }
             })
-        } 
+        }
+         
     //Delete a data for Feed Size
     const handleDeleteFeedData = id =>{
         const proceed = window.confirm('Are you sure, you want to delete?')
@@ -94,7 +95,7 @@ const Update = (props) => {
         } 
   
       }
-      
+
       const updateSpecies =()=>{
         
         const url = `http://localhost:5000/species/${tempId}/${tempFish}/${tempOxygenDemand}`;
@@ -216,11 +217,13 @@ const Update = (props) => {
                 <input type="number" onChange={(e)=>{setTempBodyWeight(e.target.value)}} value={tempBodyWeight}/>
                 <input type="number" onChange={(e)=>{setTempFeedRate(e.target.value)}} value={tempFeedRate}/>
                 <input type="number" onChange={(e)=>{setTempFrequency(e.target.value)}} value={tempFrequency}/>
-                <button onClick={()=>updateGrowth(tempId)}>Update</button>
+                <button onClick={()=>updateFeed(tempId)}>Update</button>
             </div>
             }
         </div>
     );
 };
+
+}
 
 export default Update;
