@@ -7,6 +7,11 @@ const TrComponent = (props) => {
     const [stockingDensity, setStockingDensity] = useState(null);
     const [presentSize, setPresentSize] = useState(0);
     const [totalPc, setTotalPc] = useState(0);
+    const [oxygendemand, setOxygenDemand] = useState(0);
+    const [species, setSpecies] = useState([]);
+    const [harvestSize, setHarvestSize] = useState(0);
+    const [harvestOxygenDemand, setHarvestOxygenDemand] = useState(0);
+
 
 
     const [options, setOptions] = useState([
@@ -184,16 +189,26 @@ const TrComponent = (props) => {
         setTotalPc(e.target.value);
     }
 
-    // function updateTotalWeight(){
-    //     console.log(totalPc,presentSize);
-    //     setTotalWeight(totalPc * presentSize);
-    // }
+    const handleHarvestSize = (e) => {
+      setHarvestSize(e.target.value);
+    }
+
+    useEffect(()=> {
+      fetch('http://localhost:5000/species')
+      .then(res=> res.json())
+      .then(data =>setSpecies(data))
+  },[]);
 
     useEffect(() => {
         let newTotalWeight = (totalPc * presentSize) /1000
-        setTotalWeight(newTotalWeight)
-        
+        setTotalWeight(newTotalWeight);
+        props.ChangedOxyzenDemand(newTotalWeight*optionValue);
     }, [totalPc, presentSize]);
+
+    useEffect(() => {
+      let harvestTotalWeight = (totalPc * harvestSize) /1000;
+       props.ChangedHarvestOxygenDemand(harvestTotalWeight * optionValue); 
+    }, [totalPc, harvestSize])
     
 
     return (
@@ -211,9 +226,9 @@ const TrComponent = (props) => {
                 <td><input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc} value={totalPc}></input></td>
                 <td><input type = "number" style={{width: "80px"}} ></input></td>
                 <td><input type = "number" style={{width: "80px"}} onChange={handlePresentSize} value={presentSize}></input></td>
-                <td><input type = "number" min="1" max="5" onChange= {handleStockingDensity} value={stockingDensity}></input></td>
+                <td><input type = "number" min="1" max="5"         onChange={handleStockingDensity} value={stockingDensity}></input></td>
                 <td><input type = "number" style={{width: "70px"}} onChange={handleTotalWeight} value={totalWeight}></input></td>
-                <td><input type = "number" style={{width: "80px"}} ></input></td>
+                <td><input type = "number" style={{width: "80px"}} onChange={handleHarvestSize} ></input></td>
                 <td><input type = "number" style={{width: "80px"}} onChange={handlePresentBiomass} value={presentBiomass}></input></td>
             </tr>
     );

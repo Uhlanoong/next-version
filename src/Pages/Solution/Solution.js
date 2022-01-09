@@ -16,6 +16,8 @@ const Solution = () => {
     const [volume, setVolume] = useState('');
     const [production, setProduction] = useState('');
     const [oxygendemand, setOxygenDemand] = useState(0);
+    const [harvestOxygenDemand, setHarvestOxygenDemand] = useState(0);
+
 
     //Table formula
     const [totalPc, setTotalPc] = useState(null);
@@ -466,7 +468,7 @@ const Solution = () => {
                     <tbody>
                           
                         {Array(rows).fill(null).map((value, index) => (
-                            <TrComponent  key={index} rowId={index} ChangedTotalWeight={(totalWeight) => console.log("totalWeight")}/>
+                            <TrComponent  key={index} rowId={ index +1 } ChangedHarvestOxygenDemand={(result) => setHarvestOxygenDemand(result)}  ChangedOxyzenDemand={(result) => setOxygenDemand(result)}/>
                         ))}
                           
                     </tbody>
@@ -482,7 +484,7 @@ const Solution = () => {
                     {/* <br/>
                     Bodyweight: {age} */}
                     <br/>
-                    Total O<sub>2</sub> demand harvest size:
+                    Total O<sub>2</sub> demand harvest Demand: {harvestOxygenDemand}
                     <br/>
                     Zonewise Fish Distribution:
                     <br/>
