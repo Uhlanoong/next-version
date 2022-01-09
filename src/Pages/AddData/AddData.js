@@ -6,6 +6,8 @@ const AddData = () => {
     const fishtypeRef = useRef();
     const bodyweightRef = useRef();
     const ageRef = useRef();
+    const feedfishtypeRef = useRef();
+    const feedbodyweightRef = useRef();
     const feedrateRef = useRef();
     const feedtypeRef = useRef();
     const frequencyRef = useRef();
@@ -36,10 +38,13 @@ const AddData = () => {
 
     //  Handling of Daily Growth
     const handleAddGrowthData = (e) =>{
+        e.preventDefault();
         const fishtype = fishtypeRef.current.value;
         const bodyweight = bodyweightRef.current.value
         const age = ageRef.current.value
-        const newData = {fishtype, bodyweight, age}
+        const newData = {fishtype, bodyweight, age};
+
+        console.log(newData);
         
         fetch('http://localhost:5000/database',{
             method : 'POST',
@@ -56,19 +61,19 @@ const AddData = () => {
                 e.target.reset();
             }
         })
-
-        e.preventDefault();
     }
 
     // Handling of Feed Size
 
     const handleAddFeedData = (e) =>{
-        const fishtype = fishtypeRef.current.value;
-        const bodyweight = bodyweightRef.current.value
+        const fishtype = feedfishtypeRef.current.value;
+        const bodyweight = feedbodyweightRef.current.value
         const feedtype = feedtypeRef.current.value
         const feedrate = feedrateRef.current.value
         const frequency = frequencyRef.current.value
         const newFeed = {fishtype,feedtype, bodyweight, feedrate,frequency}
+
+        console.log(newFeed);
         
         fetch('http://localhost:5000/feed',{
             method : 'POST',
@@ -92,24 +97,24 @@ const AddData = () => {
     return (
         <div>
             <form onSubmit={handleAddData}>
-                <input type="text" ref ={fishRef}/>
-                <input type= "number" ref ={oxygendemandRef}/>
+                <input type="text" ref ={fishRef} placeholder='Species Name'/>
+                <input type= "number" ref ={oxygendemandRef} placeholder='Oxygen Demand'/>
                 <input type= "submit" value= "Add"/>
             </form>
             <br/>
             <form onSubmit={handleAddGrowthData}>
-                <input type="text" ref ={fishtypeRef}/>
-                <input type= "number" ref ={ageRef}/>
-                <input type= "number" ref ={bodyweightRef}/>
-                <input type= "submit" value= "Add"/>
+                <input type="text" ref={fishtypeRef} placeholder='Fish Type'/>
+                <input type= "number" ref={ageRef} placeholder='Age'/>
+                <input type= "number" ref={bodyweightRef} placeholder='Body weight'/>
+                <input type= "submit" value="Add"/>
             </form>
             <br/>
             <form onSubmit={handleAddFeedData}>
-                <input type="text" ref ={fishtypeRef}/>
-                <input type="text" ref ={feedtypeRef}/>
-                <input type= "number" ref ={bodyweightRef}/>
-                <input type= "number" ref ={feedrateRef}/>
-                <input type= "number" ref ={frequencyRef}/>
+                <input type="text" ref ={feedfishtypeRef} placeholder='Fish Type'/>
+                <input type="text" ref ={feedtypeRef} placeholder='Age'/>
+                <input type= "number" ref ={feedbodyweightRef} placeholder='Body weight'/>
+                <input type= "text" ref ={feedrateRef} placeholder='Feed Rate'/>
+                <input type= "number" ref ={frequencyRef} placeholder='Frequency'/>
                 <input type= "submit" value= "Add"/>
             </form>
         </div>

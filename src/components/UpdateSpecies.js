@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const Update = (props) => {
+const UpdateSpecies = (props) => {
     const [isUpdateState, setIsUpdateState] = useState(false);
     const [tempFish, setTempFish] = useState('')
     const [tempOxygenDemand, setTempOxygenDemand] = useState(0);
@@ -65,7 +65,7 @@ const Update = (props) => {
               method: 'DELETE'
           })
           .then(res=> res.json())
-            .then(data =>{
+          .then(data =>{
                 if(data.deletedCount>0){
                     alert('Successfully deleted the data')
                     const remainingData = growth.filter(fishtype=>fishtype._id !== id)
@@ -74,27 +74,28 @@ const Update = (props) => {
                 }
             })
         }
+    }
          
     //Delete a data for Feed Size
-    const handleDeleteFeedData = id =>{
-        const proceed = window.confirm('Are you sure, you want to delete?')
-        if (proceed){
-          const url = `http://localhost:5000/feed/${id}`;
-          fetch(url, {
-              method: 'DELETE'
-          })
-          .then(res=> res.json())
-            .then(data =>{
-                if(data.deletedCount>0){
-                    alert('Successfully deleted the data')
-                    const remainingData = feed.filter(fishtype=>fishtype._id !== id)
-                    setFeed(remainingData);
-                    window.location.reload()
-                }
-            })
-        } 
+    // const handleDeleteFeedData = id =>{
+    //     const proceed = window.confirm('Are you sure, you want to delete?')
+    //     if (proceed){
+    //       const url = `http://localhost:5000/feed/${id}`;
+    //       fetch(url, {
+    //           method: 'DELETE'
+    //       })
+    //       .then(res=> res.json())
+    //         .then(data =>{
+    //             if(data.deletedCount>0){
+    //                 alert('Successfully deleted the data')
+    //                 const remainingData = feed.filter(fishtype=>fishtype._id !== id)
+    //                 setFeed(remainingData);
+    //                 window.location.reload()
+    //             }
+    //         })
+    //     } 
   
-      }
+    //   }
 
       const updateSpecies =()=>{
         
@@ -149,36 +150,35 @@ const Update = (props) => {
         setTempOxygenDemand(props.species.oxygendemand);
         
       }
-      // Handle Update Growth
-        const handleUpdateGrowth = ()=>{
-        setTempId(props.growth._id)
-        setIsUpdateState(true);
-        setTempFishType(props.growth.fishtype);
-        setTempAge(props.growth.age);
-        setTempBodyWeight(props.growth.bodyweight);
+    //   // Handle Update Growth
+    //     const handleUpdateGrowth = ()=>{
+    //     setTempId(props.growth._id)
+    //     setIsUpdateState(true);
+    //     setTempFishType(props.growth.fishtype);
+    //     setTempAge(props.growth.age);
+    //     setTempBodyWeight(props.growth.bodyweight);
         
-      }
-      // Handle Update Feed
-        const handleUpdateFeed = ()=>{
-        setTempId(props.feed._id)
-        setIsUpdateState(true);
-        setTempFishType(props.feed.fishtype);
-        setTempFeedType(props.feed.feedtype);
-        setTempFeedRate(props.feed.feedrate);
-        setTempFrequency(props.feed.frequency);
-        setTempBodyWeight(props.feed.bodyweight);
+    //   }
+    //   // Handle Update Feed
+    //     const handleUpdateFeed = ()=>{
+    //     setTempId(props.feed._id)
+    //     setIsUpdateState(true);
+    //     setTempFishType(props.feed.fishtype);
+    //     setTempFeedType(props.feed.feedtype);
+    //     setTempFeedRate(props.feed.feedrate);
+    //     setTempFrequency(props.feed.frequency);
+    //     setTempBodyWeight(props.feed.bodyweight);
         
-      }
+    //   }
 
     return (
         <div>
             <li>
                 {props.species.fish} ::{props.species.oxygendemand}
-                
                 <button onClick={()=>handleUpdateSpecies(props.species._id)}>Update</button>
                 <button onClick={()=>handleDeleteData(props.species._id)}>Delete</button>
             </li>
-            <li>
+            {/* <li>
                 {props.growth.fishtype} ::{props.growth.age} :: {props.growth.bodyweight}
                 
                 <button onClick={()=>handleUpdateGrowth(props.growth._id)}>Update</button>
@@ -189,7 +189,7 @@ const Update = (props) => {
                 
                 <button onClick={()=>handleUpdateFeed(props.feed._id)}>Update</button>
                 <button onClick={()=>handleDeleteFeedData(props.feed._id)}>Delete</button>
-            </li>
+            </li> */}
 
             {
             isUpdateState && 
@@ -199,7 +199,7 @@ const Update = (props) => {
                 <button onClick={()=>updateSpecies(tempId)}>Update</button>
             </div>
             }
-            {
+            {/* {
             isUpdateState && 
             <div>
                 <input type="text" onChange={(e)=>{setTempFishType(e.target.value)}} value={tempFishType}/>
@@ -218,11 +218,11 @@ const Update = (props) => {
                 <input type="number" onChange={(e)=>{setTempFrequency(e.target.value)}} value={tempFrequency}/>
                 <button onClick={()=>updateFeed(tempId)}>Update</button>
             </div>
-            }
+            } */}
         </div>
     );
 };
 
-}
 
-export default Update;
+
+export default UpdateSpecies;
