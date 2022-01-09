@@ -1,18 +1,16 @@
-/* eslint-disable no-unused-vars */
-
+/* eslint-disable no-undef */
 import React, { useEffect, useState,} from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
-import './Solution.css';
+// import './Solution.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import '../Stackoverflow/Stackoverflow';
 import Results from '../Age/Results';
-// import Tablerow from '../Row/Tablerow';
-import SolutionRow from './SolutionRow';
+import Tablerow from '../Row/Tablerow';
 
 
 
-const Solution = () => {
+const Previous = () => {
     // Output formula
     const [waterArea, setWaterArea] = useState(0);
     const [waterDepth, setWaterDepth] = useState(0);
@@ -20,6 +18,7 @@ const Solution = () => {
     const [production, setProduction] = useState('');
     const [oxygendemand, setOxygenDemand] = useState(0);
     const [oxygenHarvestdemand, setOxygenHarvestDemand] = useState(0);
+    const [oxygenHarvesttwodemand, setOxygenHarvestTwoDemand] = useState(0);
     const [oxygentwodemand, setOxygenTwoDemand] = useState(0);
 
     //Table formula
@@ -106,26 +105,19 @@ const Solution = () => {
       setData({ date: e.target.value });
     };
 
-    const [options, setOptions] = useState([
-      { id: '1', name: "Select…", value: 0, upperlayer: "",},
-      { id: '2', name: "Rui", value: 3000, upperlayer: "",},
-      { id: '3', name: "Catla", value: 3000, upperlayer: "Catla",},
+      // eslint-disable-next-line no-unused-vars
+    const options= [
+      { id: '1', name: "Select…", value: 0,},
+      { id: '2', name: "Rui", value: 3000,},
+      { id: '3', name: "Catla", value: 3000,},
       { id: '4', name: "Carpio", value: 3000,},
-      { id: '5', name: "Silver Carp", value: 3000,},
-      { id: '6', name: "Grass Carp", value: 3000,},
-      { id: '7', name: "Black Carp", value: 3000,},
-      { id: '8', name: "Big Head", value: 3000,},
-      { id: '9', name: "Tilapia", value: 1750,},
-      { id: '10', name: "Mrigel", value: 3000,},
-      { id: '11', name: "Pabda", value: 3500,},
-      { id: '12',name: "Pangasius", value: 350,},
-      { id: '13', name: "Koi",value: 750,},
-      { id: '14', name: "Shing",value: 7500,},
-      { id: '15', name: "Magur",value: 7500,},
-      { id: '16', name: "Gulsha",value: 7500,},
-      { id: '17', name: "Bagdha",value: 7500,},
-      { id: '18', name: "Goldha",value: 7500,},
-    ]);
+      { id: '5', name: "Tilapia", value: 1750,},
+      { id: '6', name: "Mrigel", value: 3000,},
+      { id: '7', name: "Pabda", value: 3500,},
+      {id: '8',name: "Pangasius",},
+      {id: '9', name: "Koi",value: 750,},
+    ];
+      // eslint-disable-next-line no-unused-vars
     const [fishes, setFishes] = useState([
       { id: '11', name: "Select…", value: 0,},
       { id: '12', name: "Rui", value: 3000,},
@@ -160,12 +152,19 @@ const Solution = () => {
         setOxygenHarvestDemand(newOxygenHarvestDemand)
      }, [value, totalHarvestWeight]);
 
+     useEffect(() => {
+        let newOxygenHarvestTwoDemand = twovalue * totalHarvestWeight
+        setOxygenHarvestTwoDemand(newOxygenHarvestTwoDemand)
+     }, [twovalue, totalHarvestWeight]);
+
       useEffect(() => {
         let newOxygenTwoDemand = twovalue * totalWeight
         setOxygenTwoDemand(newOxygenTwoDemand)
      }, [twovalue, totalWeight]);
 
     
+    
+     
     return (
         <div className = "my-2">
             <Container>
@@ -240,9 +239,79 @@ const Solution = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                        [" ", " ", " ",].map(item=>(<SolutionRow />))
-                        }
+                        <tr>
+                        <td>1</td>
+                        <td>
+                        <select onChange={handleChange} value={value}>
+                            {options.map((item) => (
+                            <option key={item.id} value={item.value}>
+                                {item.name}
+                            </option>
+                            ))}
+                        </select>
+
+                        </td>
+                        <td><input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc}></input></td>
+                        <td><input type = "number" style={{width: "80px"}} ></input></td>
+                        <td><input type = "number" style={{width: "80px"}} onChange={handlePresentSize}></input></td>
+                        <td><input type = "number" min="1" max="5" onChange= {handleStockingDensity} value={stockingDensity}></input></td>
+                        <td><input type = "number" style={{width: "70px"}}
+                        onChange={handleTotalWeight} value={totalWeight}></input></td>
+                        <td><input type = "number" style={{width: "80px"}} onChange={handleHarvestSize}></input></td>
+                        <td><input type = "number" style={{width: "70px"}}
+                        onChange={handleTotalHarvestWeight} value={totalHarvestWeight}></input></td>
+                        <td><input type = "number" style={{width: "80px"}}onChange={handlePresentBiomass} value={presentBiomass}></input></td>
+                        </tr>
+                        <tr>
+                        <td>2</td>
+                        <td>
+                        <select onChange={handleTwoChange} value={twovalue}>
+                          {fishes.map((item) => (
+                            <option key={item.id} value={item.value}>
+                                {item.name}
+                            </option>
+                            ))}
+                        </select>
+                        </td>
+                        <td>
+                        {<input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc}></input>}
+                        </td>
+                        <td>
+                        {<input type = "number" style={{width: "80px"}}></input>}
+                        </td>
+                        <td>
+                        {<input type = "number" style={{width: "80px"}} onChange={handlePresentSize}></input>}
+                        </td>
+                        <td>
+                        {<input type = "number" min="1" max="5" onChange= {handleStockingDensity} value={stockingDensity}></input>}
+                        </td>
+                        <td>
+                        {<input type = "number" style={{width: "70px"}}
+                        onChange={handleTotalWeight} value={totalWeight}></input>}
+                        </td>
+                        <td>
+                        <input type = "number" style={{width: "80px"}} onChange={handleHarvestSize}></input>
+                        </td>
+                        <td>
+                        <input type = "number" style={{width: "70px"}}
+                        onChange={handleTotalHarvestWeight} value={totalHarvestWeight}></input>
+                        </td>
+                        <td><input type = "number" style={{width: "80px"}}onChange={handlePresentBiomass} value={presentBiomass}></input></td>
+                        </tr>
+                        <tr>
+                        <td>3</td>
+                        <td>
+                          <Tablerow/>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
                     </tbody>
                     </Table>
                     </Col>
@@ -252,11 +321,10 @@ const Solution = () => {
                     <br/>
                     O<sub>2</sub> Production: {production} mg/hr
                     <br/>
-                    Total O<sub>2</sub> demand: {(oxygendemand + oxygentwodemand)} mg
-                    {/* <br/>
-                    Bodyweight: {age} */}
+                    Total O<sub>2</sub>demand: {(oxygendemand + oxygentwodemand)} mg
+                    
                     <br/>
-                    Total O<sub>2</sub> demand harvest size: {oxygenHarvestdemand} mg
+                    Total O<sub>2</sub> demand harvest size: {oxygenHarvestdemand + oxygenHarvesttwodemand} mg
                     <br/>
                     Zonewise Fish Distribution:
                     <br/>
@@ -326,4 +394,4 @@ const fish = [
 
 
 
-export default Solution;
+export default Previous;

@@ -33,7 +33,7 @@ function Results({ date }) {
             <Form>
                 <Row>
                 <Form.Group as={Col} controlId="formGridStockingDate">
-                <Form.Control type = "number" placeholder = "Age" value={AllDays} />
+                <Form.Control type = "number" placeholder = "Age" value={AllDays}/>
                 </Form.Group>
                 </Row>
                 
