@@ -12,7 +12,7 @@ const UpdateGrowthRate = (props) => {
     // Growth State
     useEffect(() => {
         console.log(props);
-    }, []);
+    }, [props]);
 
     //Delete a data for Daily Growth
     const handleDeleteGrowthData = id =>{
@@ -60,11 +60,11 @@ const UpdateGrowthRate = (props) => {
 
     return (
         <div>
-            <li>
+            <>
                 {props.growth.fishtype} :: {props.growth.age} :: {props.growth.bodyweight}
                 <button onClick={()=>handleUpdateGrowth(props.growth._id)}>Update</button>
                 <button onClick={()=>handleDeleteGrowthData(props.growth._id)}>Delete</button>
-            </li>
+            </>
 
             {
               isUpdateState && 

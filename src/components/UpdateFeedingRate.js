@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 const UpdateFeedingRate = (props) => {
     const [isUpdateState, setIsUpdateState] = useState(false);
-    const [tempFish, setTempFish] = useState('')
-    const [tempOxygenDemand, setTempOxygenDemand] = useState(0);
+    // const [tempFish, setTempFish] = useState('')
+    // const [tempOxygenDemand, setTempOxygenDemand] = useState(0);
     const [tempFishType, setTempFishType] = useState('')
     const [tempBodyWeight, setTempBodyWeight] = useState(0);
     const [tempFeedType, setTempFeedType] = useState('');
@@ -24,9 +24,7 @@ const UpdateFeedingRate = (props) => {
         .then(data =>setFeed(data))
     }, []);
 
-   
-   
-         
+       
     // Delete a data for Feed Size
     const handleDeleteFeedData = id =>{
         const proceed = window.confirm('Are you sure, you want to delete?')
@@ -80,11 +78,11 @@ const UpdateFeedingRate = (props) => {
 
     return (
         <div>
-            <li>
-                {props.feed.fishtype} :: {props.feed.feedtype} :: {props.feed.feedrate} :: {props.feed.frequency} :: {props.feed.bodyweight}
+            <>
+                {props.feed.fishtype} <br/> {props.feed.feedtype} <br/> {props.feed.feedrate} <br/> {props.feed.frequency} :: {props.feed.bodyweight}
                 <button onClick={()=>handleUpdateFeed(props.feed._id)}>Update</button>
                 <button onClick={()=>handleDeleteFeedData(props.feed._id)}>Delete</button>
-            </li>
+            </>
             {
                isUpdateState && 
                 <div>

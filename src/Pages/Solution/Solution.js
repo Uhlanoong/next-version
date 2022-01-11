@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState,} from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import './Solution.css';
 import TextField from '@mui/material/TextField';
@@ -7,7 +8,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import '../Stackoverflow/Stackoverflow';
 import Results from '../Age/Results';
 import TrComponent from '../../components/TrComponent';
-// import Result from '../Age/Result';
 
 const Solution = () => {
     // Output formula
@@ -35,7 +35,7 @@ const Solution = () => {
     }
     
     const handleTotalWeight = (e)=>{
-        // setTotalWeight(e.target.value)
+        setTotalWeight(e.target.value)
     }
     const handleTotalPc = (e)=>{
         setTotalPc(e.target.value);
@@ -93,305 +93,6 @@ const Solution = () => {
       setData({ date: e.target.value });
     };
 
-    // eslint-disable-next-line no-unused-vars
-    const [choices, setChoices] = useState([
-      {
-        name: "Select…",
-        value: null,
-      },
-      {
-        name: "Rui",
-        value: 3000,
-        age: {
-          day1: 0,
-          day15: 5,
-          day30: 15,
-          day45: 25,
-          day60: 55,
-          day75: 95,
-          day90: 150,
-          day105: 210,
-          day120: 175,
-          day135: 350,
-          day150: 430,
-          day165: 515,
-          day180: 610,
-        },
-      },
-      {
-        name: "Catla",
-        value: 3000,
-        age: {
-          day1: 0,
-          day15: 5,
-          day30: 15,
-          day45: 25,
-          day60: 55,
-          day75: 95,
-          day90: 150,
-          day105: 210,
-          day120: 175,
-          day135: 350,
-          day150: 430,
-          day165: 515,
-          day180: 610,
-        }
-      },
-      {
-        name: "Carpio",
-        value: 3000,
-        age: {
-          day1: 0,
-          day15: 5,
-          day30: 15,
-          day45: 25,
-          day60: 55,
-          day75: 95,
-          day90: 150,
-          day105: 210,
-          day120: 175,
-          day135: 350,
-          day150: 430,
-          day165: 515,
-          day180: 610,
-        }
-      },
-      {
-        name: "Tilapia",
-        value: 1750,
-      },
-      {
-        name: "Mrigel",
-        value: 3000,
-        age: {
-          day1: 0,
-          day15: 5,
-          day30: 15,
-          day45: 25,
-          day60: 55,
-          day75: 95,
-          day90: 150,
-          day105: 210,
-          day120: 175,
-          day135: 350,
-          day150: 430,
-          day165: 515,
-          day180: 610,
-        }
-      },
-      {
-        name: "Pabda",
-        value: 3500,
-      },
-      {
-        id: '8',
-        name: "Pangasius",
-        age: {
-          day1: 30,
-          day15: 79,
-          day30: 133,
-          day45: 196,
-          day60: 265,
-          day75: 343,
-          day90: 430,
-          day105: 523,
-          day120: 616,
-          day135: 712,
-          day150: 808,
-          day165: 904,
-          day180: 1000,
-        }
-        
-      },
-      {
-        name: "Koi",
-        value: 750,
-        age: {
-          day1: 0.25,
-          day15: 5,
-          day30: 10,
-          day45: 20,
-          day60: 35,
-          day75: 55,
-          day90: 80,
-          day105: 110,
-          day120: 150,
-        }
-      },
-    ]);
-    // const [age, setAge] = useState("");
-  
-    // const handleAgeChange = useCallback((e) => {
-    //   setAge(e.target.value);
-    // }, []);
-  
-
-    // eslint-disable-next-line no-unused-vars
-    const [options, setOptions] = useState([
-        { id: '1',
-          name: "Select…",
-          value: 0,
-          age:{}
-        },
-        { 
-          id: '2',
-          name: "Rui",
-          value: 3000,
-          age: {
-            day1: 0,
-            day15: 5,
-            day30: 15,
-            day45: 25,
-            day60: 55,
-            day75: 95,
-            day90: 150,
-            day105: 210,
-            day120: 175,
-            day135: 350,
-            day150: 430,
-            day165: 515,
-            day180: 610,
-          }
-        },
-        {
-          id: '3',
-          name: "Catla",
-          value: 3000,
-          age: {
-            day1: 0,
-            day15: 5,
-            day30: 15,
-            day45: 25,
-            day60: 55,
-            day75: 95,
-            day90: 150,
-            day105: 210,
-            day120: 175,
-            day135: 350,
-            day150: 430,
-            day165: 515,
-            day180: 610,
-          }
-        },
-        { 
-          id: '4',
-          name: "Carpio",
-          value: 3000,
-          age: {
-            day1: 0,
-            day15: 5,
-            day30: 15,
-            day45: 25,
-            day60: 55,
-            day75: 95,
-            day90: 150,
-            day105: 210,
-            day120: 175,
-            day135: 350,
-            day150: 430,
-            day165: 515,
-            day180: 610,
-          }
-        },
-        { 
-          id: '5',
-          name: "Tilapia",
-          value: 1750,
-          age: {
-            day1: 20,
-            day15: 35,
-            day30: 55,
-            day45: 80,
-            day60: 110,
-            day75: 150,
-            day90: 200,
-            day105: 260,
-            day120: 330,
-            day135: 405,
-            day150: 490,
-            day165: 585,
-            day180: 700,
-          }
-        },
-        {
-          id: '6',
-          name: "Mrigel",
-          value: 3000,
-          age: {
-            day1: 0,
-            day15: 5,
-            day30: 15,
-            day45: 25,
-            day60: 55,
-            day75: 95,
-            day90: 150,
-            day105: 210,
-            day120: 175,
-            day135: 350,
-            day150: 430,
-            day165: 515,
-            day180: 610,
-          }
-        },
-        {
-          id: '7',
-          name: "Pabda",
-          value: 3500,
-          
-        },
-        {
-          id: '8',
-          name: "Pangasius",
-          age: {
-            day1: 30,
-            day15: 79,
-            day30: 133,
-            day45: 196,
-            day60: 265,
-            day75: 343,
-            day90: 430,
-            day105: 523,
-            day120: 616,
-            day135: 712,
-            day150: 808,
-            day165: 904,
-            day180: 1000,
-          }
-          
-        },
-        {
-          id: '9',
-          name: "Koi",
-          value: 750,
-          age: {
-            day1: 0.25,
-            day15: 5,
-            day30: 10,
-            day45: 20,
-            day60: 35,
-            day75: 55,
-            day90: 80,
-            day105: 110,
-            day120: 150,
-          }
-        },
-      ]);
-
-      
-      const [value, setValue] = useState("");
-      
-
-      const handleChange = useCallback((e) => {
-        setValue(e.target.value);
-      }, []);
-      
-    
-      
-      useEffect(() => {
-        let newOxygenDemand = value * totalWeight
-        setOxygenDemand(newOxygenDemand)
-     }, [value, totalWeight]);
-
      
     return (
         <div className = "my-2">
@@ -411,13 +112,6 @@ const Solution = () => {
                         </Form.Group>
                         
                         <Form.Group as={Col} controlId="formGridProblembatic Species">
-                        {/* <select onChange={handleAgeChange} value={age}>
-                            {choices.map((item) => (
-                            <option key={item.id} value={item.age}>
-                                {item.name}
-                            </option>
-                            ))}
-                        </select> */}
                         <Autocomplete
                             disablePortal
                             id=""
@@ -442,8 +136,6 @@ const Solution = () => {
                             <Form.Control type="text" readOnly placeholder="Age" value={CalculateAge(data.date)}/>
                           </Form.Group>
                         }
-
-
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
                         <Form.Control type = "number" placeholder = "Stocking Quantity" />
                         </Form.Group>
@@ -481,10 +173,8 @@ const Solution = () => {
                     O<sub>2</sub> Production: {production} mg/hr
                     <br/>
                     Total O<sub>2</sub> demand: {oxygendemand} mg
-                    {/* <br/>
-                    Bodyweight: {age} */}
                     <br/>
-                    Total O<sub>2</sub> demand harvest Demand: {harvestOxygenDemand}
+                    Total harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
                     <br/>
                     Zonewise Fish Distribution:
                     <br/>
@@ -495,9 +185,11 @@ const Solution = () => {
                     Solution:
                     </p>
                     </Col>
-                    <Button type = "submit" variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button>
+                    
                     <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
-
+                    <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
+                    <br/>
+                    <Button type = "submit" variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button>
                 </Row>
             </Container>
         </div>
@@ -505,51 +197,13 @@ const Solution = () => {
 };
 const fish = [
   
-    { label: 'Tilapia',
-      value: 1750
-    },
-    { label: 'Pangasius',
-    value: 350,
-    },
-    { label: 'Rui',
-    value: 3000,
-    },
-    { label: 'Mrigel',
-    value: 3000, 
-    },
-    { label: 'Koi',
-    value: 750, 
-    },
-    { label: 'Catla',
-    value: 3000, 
-    },
-    { label: 'Silver Carp',
-    value: 3000,
-    },
-    { label: 'Carpio',
-    value: 3000,
-    },
-    { label: 'Big Head',
-    value: 3000,
-    },
-    { label: 'Black Carp',
-    value: 3000,
-    },
-    { label: 'Kali Baus',
-    value: 3000, 
-    },
-    { label: 'Pabda', 
-    value: 3500
-    },
-    { label: 'Gulsha' },
-    { label: 'Grass Carp'},
-    { label: 'Shing' },
-    { label: 'Magur' },
-    { label: 'Shol' },
-    { label: 'Shorputi' },
-    { label: 'Bagdha' },
-    { label: 'Goldha' },
-    { label: 'Others' }
+    { label: 'Tilapia',},{ label: 'Pangasius',},{ label: 'Rui',},
+    { label: 'Mrigel',},{ label: 'Koi',},{ label: 'Catla',},
+    { label: 'Silver Carp',},{ label: 'Carpio',},{ label: 'Big Head',},
+    { label: 'Black Carp',},{ label: 'Kali Baus',},{ label: 'Pabda',},
+    { label: 'Gulsha' },{ label: 'Grass Carp'},{ label: 'Shing' },
+    { label: 'Magur' },{ label: 'Shol' },{ label: 'Shorputi' },
+    { label: 'Bagdha' },{ label: 'Goldha' },{ label: 'Others' }
     
   ];
 

@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 const AddData = () => {
     const fishRef = useRef();
     const oxygendemandRef = useRef();
+    const layerRef = useRef();
     const fishtypeRef = useRef();
     const bodyweightRef = useRef();
     const ageRef = useRef();
@@ -15,7 +16,8 @@ const AddData = () => {
     const handleAddData = (e) =>{
         const fish = fishRef.current.value;
         const oxygendemand = oxygendemandRef.current.value
-        const newSpecies = {fish, oxygendemand}
+        const layer = layerRef.current.value
+        const newSpecies = {fish, oxygendemand, layer}
         
         fetch('http://localhost:5000/species',{
             method : 'POST',
@@ -96,12 +98,15 @@ const AddData = () => {
 
     return (
         <div>
+            <h3>Species Data</h3>
             <form onSubmit={handleAddData}>
                 <input type="text" ref ={fishRef} placeholder='Species Name'/>
                 <input type= "number" ref ={oxygendemandRef} placeholder='Oxygen Demand'/>
+                <input type= "text" ref ={layerRef} placeholder='Layer Type'/>
                 <input type= "submit" value= "Add"/>
             </form>
             <br/>
+            <h3>Daily Growth Data</h3>
             <form onSubmit={handleAddGrowthData}>
                 <input type="text" ref={fishtypeRef} placeholder='Fish Type'/>
                 <input type= "number" ref={ageRef} placeholder='Age'/>
@@ -109,6 +114,7 @@ const AddData = () => {
                 <input type= "submit" value="Add"/>
             </form>
             <br/>
+            <h3>Feed Table Data</h3>
             <form onSubmit={handleAddFeedData}>
                 <input type="text" ref ={feedfishtypeRef} placeholder='Fish Type'/>
                 <input type="text" ref ={feedtypeRef} placeholder='Age'/>
