@@ -16,6 +16,7 @@ const TrComponent = (props) => {
     const handleChange = useCallback((e) => {
         console.log(parseInt(e.target.value.split('-')[1]));
         setOptionValue(parseInt(e.target.value.split('-')[1]));
+        props.ChangedFeedingLayer(e.target.value.split('-')[2]);
     }, []);
 
     const handleTotalPc = (e)=>{
@@ -44,6 +45,8 @@ const TrComponent = (props) => {
       fetch('http://localhost:5000/species')
       .then(res=> res.json())
       .then(data =>setSpecies(data))
+
+      console.log(species);
     },[]);
 
     useEffect(() => {
@@ -65,7 +68,7 @@ const TrComponent = (props) => {
                 {/* (e) => setOptionValue(e.target.value) */}
                 <select onChange={ handleChange } value={optionValue}>
                     {species.map((item,index) => (
-                        <option key={`${item._id}-${index}`} value={`${item.fish}-${item.oxygendemand}`}>
+                        <option key={`${item._id}-${index}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
                             {item.fish}
                         </option>
                     ))}

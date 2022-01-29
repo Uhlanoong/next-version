@@ -26,6 +26,7 @@ const Solution = () => {
     
     const [totalWeight, setTotalWeight] = useState('')
     const [presentBiomass, setPresentBiomass] = useState('');
+    const [feedingLayer, setFeedingLayer] = useState('');
 
     const [rows, setRows] = useState(1);
     
@@ -160,7 +161,7 @@ const Solution = () => {
                     <tbody>
                           
                         {Array(rows).fill(null).map((value, index) => (
-                            <TrComponent  key={index} rowId={ index +1 } ChangedHarvestOxygenDemand={(result) => setHarvestOxygenDemand(result)}  ChangedOxyzenDemand={(result) => setOxygenDemand(result)}/>
+                            <TrComponent  key={index} rowId={ index +1 } ChangedHarvestOxygenDemand={(result) => setHarvestOxygenDemand(result)}  ChangedOxyzenDemand={(result) => setOxygenDemand(result)} ChangedFeedingLayer={(res)=>setFeedingLayer(res)} />
                         ))}
                           
                     </tbody>
@@ -177,11 +178,8 @@ const Solution = () => {
                     Total harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
                     <br/>
                     Zonewise Fish Distribution:
-                    <br/>
-                    Upper layer: <br/>
-                    Mid Layer: <br/>
-                    Bottom Layer: <br/>
-                    Rmd Feed size: <br/>
+                      <br/>
+                     {feedingLayer}
                     Solution:
                     </p>
                     </Col>
@@ -195,17 +193,7 @@ const Solution = () => {
         </div>
     );
 };
-const fish = [
-  
-    { label: 'Tilapia',},{ label: 'Pangasius',},{ label: 'Rui',},
-    { label: 'Mrigel',},{ label: 'Koi',},{ label: 'Catla',},
-    { label: 'Silver Carp',},{ label: 'Carpio',},{ label: 'Big Head',},
-    { label: 'Black Carp',},{ label: 'Kali Baus',},{ label: 'Pabda',},
-    { label: 'Gulsha' },{ label: 'Grass Carp'},{ label: 'Shing' },
-    { label: 'Magur' },{ label: 'Shol' },{ label: 'Shorputi' },
-    { label: 'Bagdha' },{ label: 'Goldha' },{ label: 'Others' }
-    
-  ];
+
 
 
 
