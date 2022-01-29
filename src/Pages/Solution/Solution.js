@@ -48,9 +48,25 @@ const Solution = () => {
           oxygendemand,
           harvestOxygenDemand
       };
-      let newArr = [...speciesReferenceObj,resObj];
-      setSpeciesReferenceObj(newArr);
+    //   let newArr = [...speciesReferenceObj,resObj];
+    //   setSpeciesReferenceObj(newArr);
+
+        fetch('http://localhost:5000/species-reference',{
+            method : 'POST',
+            headers : {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(resObj)
+        })
     }
+
+    useEffect(()=>{
+        fetch('http://localhost:5000/species-reference')
+        .then(res=> res.json())
+        .then(data =>{
+            setSpeciesReferenceObj(data);
+        })
+    },[speciesReferenceObj])
 
     console.log(speciesReferenceObj);
 
