@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
+
 const TrComponent = (props) => {
     const [species, setSpecies] = useState([]);
     const [optionValue, setOptionValue] = useState(0);
     const [totalPc, setTotalPc] = useState(0);
     const [stockingSize, setStockingSize] = useState(0);
     const [presentSize, setPresentSize] = useState(0);
-    const [stockingDensity, setStockingDensity] = useState(null);
+    const [stockingDensity, setStockingDensity] = useState('');
     const [totalWeight, setTotalWeight] = useState('')
     const [harvestSize, setHarvestSize] = useState(0);
     const [presentBiomass, setPresentBiomass] = useState('');
 
 
     const handleChange = useCallback((e) => {
+        console.log(e);
+        console.log(e.target.value);
         setOptionValue(e.target.value);
     }, []);
 
@@ -60,9 +63,10 @@ const TrComponent = (props) => {
             <tr>
                 <td>{props.rowId}</td>
                 <td>
-                <select onChange={handleChange} value={optionValue}>
-                    {species.map((item) => (
-                        <option key={item._id} value={item.oxygendemand}>
+                {/* (e) => setOptionValue(e.target.value) */}
+                <select onChange={ handleChange } value={optionValue}>
+                    {species.map((item,index) => (
+                        <option key={`${item._id}-${index}`} value={item.fish}>
                             {item.fish}
                         </option>
                     ))}
