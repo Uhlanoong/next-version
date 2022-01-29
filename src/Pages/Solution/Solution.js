@@ -193,7 +193,17 @@ const Solution = () => {
         </div>
     );
 };
-
+const fish = [
+  
+    { label: 'Tilapia',},{ label: 'Pangasius',},{ label: 'Rui',},
+    { label: 'Mrigel',},{ label: 'Koi',},{ label: 'Catla',},
+    { label: 'Silver Carp',},{ label: 'Carpio',},{ label: 'Big Head',},
+    { label: 'Black Carp',},{ label: 'Kali Baus',},{ label: 'Pabda',},
+    { label: 'Gulsha' },{ label: 'Grass Carp'},{ label: 'Shing' },
+    { label: 'Magur' },{ label: 'Shol' },{ label: 'Shorputi' },
+    { label: 'Bagdha' },{ label: 'Goldha' },{ label: 'Others' }
+    
+  ];
 
 
 

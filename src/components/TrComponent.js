@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const TrComponent = (props) => {
     const [species, setSpecies] = useState([]);
     const [optionValue, setOptionValue] = useState(0);
+    const [slectedValue, setSelectedValue] = useState("");
     const [totalPc, setTotalPc] = useState(0);
     const [stockingSize, setStockingSize] = useState(0);
     const [presentSize, setPresentSize] = useState(0);
@@ -13,11 +14,12 @@ const TrComponent = (props) => {
     const [presentBiomass, setPresentBiomass] = useState('');
 
 
-    const handleChange = useCallback((e) => {
+    const handleChange = ((e) => {
         console.log(parseInt(e.target.value.split('-')[1]));
         setOptionValue(parseInt(e.target.value.split('-')[1]));
+        setSelectedValue(e.target.value.split('-')[0])
         props.ChangedFeedingLayer(e.target.value.split('-')[2]);
-    }, []);
+    });
 
     const handleTotalPc = (e)=>{
       setTotalPc(e.target.value);
@@ -66,7 +68,7 @@ const TrComponent = (props) => {
                 <td>{props.rowId}</td>
                 <td>
                 {/* (e) => setOptionValue(e.target.value) */}
-                <select onChange={ handleChange } value={optionValue}>
+                <select onChange={ handleChange } value={slectedValue}>
                     {species.map((item,index) => (
                         <option key={`${item._id}-${index}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
                             {item.fish}
