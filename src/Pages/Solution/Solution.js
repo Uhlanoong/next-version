@@ -17,6 +17,10 @@ const Solution = () => {
     const [production, setProduction] = useState('');
     const [oxygendemand, setOxygenDemand] = useState(0);
     const [harvestOxygenDemand, setHarvestOxygenDemand] = useState(0);
+    const [totalOxygenDemand, setTotalOxygenDemand] = useState(0);
+    const [totalHarvestOxygenDemand, setTotalHarvestOxygenDemand] = useState(0);
+    const [speciesReferenceObj, setSpeciesReferenceObj] = useState([]);
+    const [fish,setFish] = useState("");
 
 
     //Table formula
@@ -27,9 +31,40 @@ const Solution = () => {
     const [totalWeight, setTotalWeight] = useState('')
     const [presentBiomass, setPresentBiomass] = useState('');
     const [feedingLayer, setFeedingLayer] = useState('');
+    const [species, setSpecies] = useState([]);
 
     const [rows, setRows] = useState(1);
     
+
+    const handleSaveData = (obj) =>{
+      console.log(obj);
+      const resObj = {
+          ...obj,
+          production,
+          volume,
+          stockingDensity,
+          presentBiomass,
+          feedingLayer,
+          oxygendemand,
+          harvestOxygenDemand
+      };
+      let newArr = [...speciesReferenceObj,resObj];
+      setSpeciesReferenceObj(newArr);
+    }
+
+    console.log(speciesReferenceObj);
+
+    useEffect(()=>{
+        let oxygendemandSum = 0;
+        let harvestOxygenDemandSum = 0;
+        for(var i = 0; i < speciesReferenceObj.length ; i++){
+            oxygendemandSum += speciesReferenceObj[i].oxygendemand;
+            harvestOxygenDemandSum += speciesReferenceObj[i].harvestOxygenDemand;
+        }
+        setTotalOxygenDemand(oxygendemandSum);
+        setTotalHarvestOxygenDemand(harvestOxygenDemandSum);
+
+    },[speciesReferenceObj])
     
     const handlePresentSize = (e)=>{
         setPresentSize(e.target.value)
@@ -47,6 +82,12 @@ const Solution = () => {
     const handlePresentBiomass = (e)=>{
         setPresentBiomass(e.target.value)
     }
+
+    useEffect(()=> {
+        fetch('http://localhost:5000/species')
+        .then(res=> res.json())
+        .then(data =>setSpecies(data))
+      },[]);
 
     useEffect(()=>{
         let cubic = parseFloat(28.32).toFixed(2)
@@ -113,13 +154,13 @@ const Solution = () => {
                         </Form.Group>
                         
                         <Form.Group as={Col} controlId="formGridProblembatic Species">
-                        <Autocomplete
-                            disablePortal
-                            id=""
-                            options={fish}
-                            sx={{ width: 260}}
-                            renderInput={(params) => <TextField {...params} label="Species" size = "small"/>}
-                        />
+                        <select>
+                            {species.map((item,index) => (
+                                <option key={`${item._id}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
+                                    {item.fish}
+                                </option>
+                            ))}
+                        </select>
                         </Form.Group>
                     </Row>
 
@@ -161,7 +202,15 @@ const Solution = () => {
                     <tbody>
                           
                         {Array(rows).fill(null).map((value, index) => (
-                            <TrComponent  key={index} rowId={ index +1 } ChangedHarvestOxygenDemand={(result) => setHarvestOxygenDemand(result)}  ChangedOxyzenDemand={(result) => setOxygenDemand(result)} ChangedFeedingLayer={(res)=>setFeedingLayer(res)} />
+                            <TrComponent  
+                                key={index +1} 
+                                rowId={ index +1 } 
+                                ChangedHarvestOxygenDemand={(result) => setHarvestOxygenDemand(result)}  
+                                ChangedOxyzenDemand={(result) => setOxygenDemand(result)} 
+                                ChangedFeedingLayer={(res)=>setFeedingLayer(res)} 
+                                ChangedSpeciesRefObj={(res) => handleSaveData(res)}
+                                ChangedFish={(res) => setFish(res)}
+                            />
                         ))}
                           
                     </tbody>
@@ -169,27 +218,57 @@ const Solution = () => {
                     </Col>
 
                     <Col sm = {3} className = "text-start">
+                    <p>Species Name: {fish}</p>
                     <p>The Water Volume is : {volume} m<sup>3</sup>
                     <br/>
                     O<sub>2</sub> Production: {production} mg/hr
                     <br/>
-                    Total O<sub>2</sub> demand: {oxygendemand} mg
+                    O<sub>2</sub> demand: {oxygendemand} mg
                     <br/>
-                    Total harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
+                    harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
                     <br/>
                     Zonewise Fish Distribution:
                       <br/>
                      {feedingLayer}
-                    Solution:
+                     <br />
+                    Total Harvest O<sub>2</sub> demand: {totalHarvestOxygenDemand} mg/hr
+                    <br/>
+                    Total O<sub>2</sub> demand: {totalOxygenDemand} mg
                     </p>
                     </Col>
-                    
                     <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
                     <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
                     <br/>
-                    <Button type = "submit" variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button>
                 </Row>
             </Container>
+
+            {
+                speciesReferenceObj && speciesReferenceObj.map((item,index) => (
+                    <Container>
+                        <Row>
+                            <Col>
+                              <div>
+                                <p>Species Name: {item.fish}</p>
+                                <p>The Water Volume is : {item.volume} m<sup>3</sup>
+                                <br/>
+                                O<sub>2</sub> Production: {item.production} mg/hr
+                                <br/>
+                                O<sub>2</sub> demand: {item.oxygendemand} mg
+                                <br/>
+                                harvest O<sub>2</sub> demand:{item.harvestOxygenDemand}mg
+                                <br/>
+                                Zonewise Fish Distribution:
+                                <br/>
+                                {item.feedingLayer}                
+                                </p>
+                              </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                ))
+            }
+           
+                    
         </div>
     );
 };

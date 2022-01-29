@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 
 const TrComponent = (props) => {
     const [species, setSpecies] = useState([]);
     const [optionValue, setOptionValue] = useState(0);
-    const [slectedValue, setSelectedValue] = useState("");
     const [totalPc, setTotalPc] = useState(0);
     const [stockingSize, setStockingSize] = useState(0);
     const [presentSize, setPresentSize] = useState(0);
@@ -12,12 +12,14 @@ const TrComponent = (props) => {
     const [totalWeight, setTotalWeight] = useState('')
     const [harvestSize, setHarvestSize] = useState(0);
     const [presentBiomass, setPresentBiomass] = useState('');
+    const [fish, setFish] = useState('');
 
 
     const handleChange = ((e) => {
         console.log(parseInt(e.target.value.split('-')[1]));
         setOptionValue(parseInt(e.target.value.split('-')[1]));
-        setSelectedValue(e.target.value.split('-')[0])
+        setFish(e.target.value.split('-')[0])
+        props.ChangedFish(e.target.value.split('-')[0])
         props.ChangedFeedingLayer(e.target.value.split('-')[2]);
     });
 
@@ -43,11 +45,32 @@ const TrComponent = (props) => {
       setPresentBiomass(e.target.value)
   }
 
+  const saveRefData = () => {
+    let refObj = {
+      fish,
+      totalPc,
+      stockingSize,
+      presentSize,
+      stockingDensity,
+      totalWeight,
+      harvestSize,
+      presentBiomass
+    };
+
+    props.ChangedSpeciesRefObj(refObj);
+  }
+
     useEffect(()=> {
       fetch('http://localhost:5000/species')
       .then(res=> res.json())
-      .then(data =>setSpecies(data))
-
+      .then(data =>{
+        setSpecies(data);
+        props.ChangedFish(data[0].fish);
+        props.ChangedFeedingLayer(data[0].layer);
+        setOptionValue(parseInt(data[0].oxygendemand))
+        setFish(data[0].fish)
+      })
+      
       console.log(species);
     },[]);
 
@@ -68,9 +91,9 @@ const TrComponent = (props) => {
                 <td>{props.rowId}</td>
                 <td>
                 {/* (e) => setOptionValue(e.target.value) */}
-                <select onChange={ handleChange } value={slectedValue}>
+                <select onChange={ handleChange }>
                     {species.map((item,index) => (
-                        <option key={`${item._id}-${index}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
+                        <option key={`${item._id}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
                             {item.fish}
                         </option>
                     ))}
@@ -83,6 +106,7 @@ const TrComponent = (props) => {
                 <td><input type = "number" style={{width: "70px"}} onChange={handleTotalWeight} value={totalWeight}></input></td>
                 <td><input type = "number" style={{width: "80px"}} onChange={handleHarvestSize} value={harvestSize}></input></td>
                 <td><input type = "number" style={{width: "80px"}} onChange={handlePresentBiomass} value={presentBiomass}></input></td>
+                <td><Button type = "submit" onClick={saveRefData} variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button></td>
             </tr>
     );
 };
