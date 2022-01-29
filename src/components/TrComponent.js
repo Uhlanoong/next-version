@@ -14,9 +14,8 @@ const TrComponent = (props) => {
 
 
     const handleChange = useCallback((e) => {
-        console.log(e);
-        console.log(e.target.value);
-        setOptionValue(e.target.value);
+        console.log(parseInt(e.target.value.split('-')[1]));
+        setOptionValue(parseInt(e.target.value.split('-')[1]));
     }, []);
 
     const handleTotalPc = (e)=>{
@@ -66,7 +65,7 @@ const TrComponent = (props) => {
                 {/* (e) => setOptionValue(e.target.value) */}
                 <select onChange={ handleChange } value={optionValue}>
                     {species.map((item,index) => (
-                        <option key={`${item._id}-${index}`} value={item.fish}>
+                        <option key={`${item._id}-${index}`} value={`${item.fish}-${item.oxygendemand}`}>
                             {item.fish}
                         </option>
                     ))}
