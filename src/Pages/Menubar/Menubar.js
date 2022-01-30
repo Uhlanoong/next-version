@@ -13,13 +13,7 @@ const Menubar = () => {
                     <Nav.Link href="/solution">Solution</Nav.Link>
                     <Nav.Link href="/database">Database</Nav.Link>
                     <Nav.Link href="/adddata">Add Data</Nav.Link>
-                    {/* <Nav.Link href="/output">Output</Nav.Link> */}
-                    {/* <Nav.Link href="/practice">Practice</Nav.Link> */}
-                    {/* <Nav.Link href="/stackoverflow">Stackoverflow</Nav.Link> */}
-                    {/* <Nav.Link href="/calculation">Calculation</Nav.Link> */}
-                    {/* <Nav.Link href="/age">Age</Nav.Link>
-                    <Nav.Link href="/previous">Previous</Nav.Link> */}
-
+                    <Nav.Link href="/savedata">Saved Data</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

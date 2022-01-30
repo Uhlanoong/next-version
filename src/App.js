@@ -4,6 +4,7 @@ import AddData from './Pages/AddData/AddData';
 import Age from './Pages/Age/Age';
 import Database from './Pages/Database/Database';
 import Menubar from './Pages/Menubar/Menubar';
+import SaveData from './Pages/SavedData/SaveData';
 import Solution from './Pages/Solution/Solution';
 
 
@@ -17,6 +18,7 @@ function App() {
           <Route path = "/database" element = {<Database/>}/>
           <Route path = "/adddata" element = {<AddData/>}/>
           <Route path = "/age" element = {<Age/>}/>
+          <Route path = "/savedata" element = {<SaveData/>}/>
         </Routes>
       </BrowserRouter>
     </div>
