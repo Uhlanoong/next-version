@@ -34,10 +34,11 @@ const Solution = () => {
     const [species, setSpecies] = useState([]);
 
     const [rows, setRows] = useState(1);
+
+    const [feedingRateData, setFeedingRateData] = useState([]);
     
 
     const handleSaveData = (obj) =>{
-      console.log(obj);
       const resObj = {
           ...obj,
           production,
@@ -48,9 +49,7 @@ const Solution = () => {
           oxygendemand,
           harvestOxygenDemand
       };
-    //   let newArr = [...speciesReferenceObj,resObj];
-    //   setSpeciesReferenceObj(newArr);
-
+  
         fetch('http://localhost:5000/species-reference',{
             method : 'POST',
             headers : {
@@ -66,9 +65,15 @@ const Solution = () => {
         .then(data =>{
             setSpeciesReferenceObj(data);
         })
-    },[speciesReferenceObj])
 
-    console.log(speciesReferenceObj);
+        fetch('http://localhost:5000/feed')
+        .then(res=> res.json())
+        .then(data =>{
+            setFeedingRateData(data);
+        })
+    },[])
+
+    console.log(feedingRateData);
 
     useEffect(()=>{
         let oxygendemandSum = 0;
@@ -150,6 +155,36 @@ const Solution = () => {
     const changeHandler = (e) => {
       setData({ date: e.target.value });
     };
+
+    
+
+    const CalculateFeedingRate = (name,totalWeight,totalPices) => {
+        let filteredData = feedingRateData.filter((item) => item.fishtype === name);
+        let singleFishWeight = totalWeight / totalPices;
+        let individualFeedingRate = "";
+        let totalFeedingRate = "";
+        filteredData.forEach((item) => {
+            if(item.bodyweight){
+                if(item.bodyweight.charAt(0) !== '>'){
+                    let range = item.bodyweight.split('-');
+                    let feedRange = item.feedrate.split('-');
+                    let max = parseInt(range[0]);
+                    let min = parseInt(range[1]);
+                    if (singleFishWeight > max && singleFishWeight < min) {
+                       console.log(item);
+                       individualFeedingRate = item.feedrate;
+                       totalFeedingRate = `${parseInt(feedRange[0])*totalPices} - ${parseInt(feedRange[1])*totalPices}`
+                    }
+                }
+            }
+        });
+
+        return {
+            individualFeedingRate,
+            totalFeedingRate
+
+        };
+    }
 
      
     return (
@@ -274,9 +309,22 @@ const Solution = () => {
                                 harvest O<sub>2</sub> demand:{item.harvestOxygenDemand}mg
                                 <br/>
                                 Zonewise Fish Distribution:
+                                {item.feedingLayer}   
                                 <br/>
-                                {item.feedingLayer}                
+                                Total Pieces : {item.totalPc}
+                                <br/>
+                                Total Weight: {item.totalWeight} kg
+
+                                <br/>
+                                Individual Weight: {parseInt(item.totalWeight)/parseInt(item.totalPc)} kg
+
+                                <br/>
+                                Feeding Rate( Individual ): {CalculateFeedingRate(item.fish,item.totalWeight,item.totalPc).individualFeedingRate}
+
+                                <br/>
+                                Feeding Rate( Total {item.totalPc} fish): {CalculateFeedingRate(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}
                                 </p>
+
                               </div>
                             </Col>
                         </Row>
