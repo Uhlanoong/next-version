@@ -5,7 +5,6 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import './Solution.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import '../Stackoverflow/Stackoverflow';
 import Results from '../Age/Results';
 import TrComponent from '../../components/TrComponent';
 
