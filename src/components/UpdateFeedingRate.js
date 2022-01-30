@@ -79,7 +79,7 @@ const UpdateFeedingRate = (props) => {
     return (
         <div>
             <>
-                {props.feed.fishtype} <br/> {props.feed.feedtype} <br/> {props.feed.feedrate} <br/> {props.feed.frequency} :: {props.feed.bodyweight}
+                {props.feed.fishtype} :: {props.feed.feedtype} :: {props.feed.bodyweight} :: {props.feed.feedrate} :: {props.feed.frequency}
                 <button onClick={()=>handleUpdateFeed(props.feed._id)}>Update</button>
                 <button onClick={()=>handleDeleteFeedData(props.feed._id)}>Delete</button>
             </>
