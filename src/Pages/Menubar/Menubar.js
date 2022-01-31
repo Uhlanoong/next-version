@@ -13,7 +13,8 @@ const Menubar = () => {
                     <Nav.Link href="/solution">Solution</Nav.Link>
                     <Nav.Link href="/database">Database</Nav.Link>
                     <Nav.Link href="/adddata">Add Data</Nav.Link>
-                    <Nav.Link href="/savedata">Saved Data</Nav.Link>
+                    {/* <Nav.Link href="/savedata">Saved Data</Nav.Link> */}
+                    <Nav.Link href="/species-reference-data">Saved Reference Data</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
