@@ -14,6 +14,8 @@ const TrComponent = (props) => {
     const [presentBiomass, setPresentBiomass] = useState('');
     const [fish, setFish] = useState('');
 
+    const [isSaved, setIsSaved] = useState(false);
+
 
     const handleChange = ((e) => {
         console.log(parseInt(e.target.value.split('-')[1]));
@@ -56,8 +58,8 @@ const TrComponent = (props) => {
       harvestSize,
       presentBiomass
     };
-
     props.ChangedSpeciesRefObj(refObj);
+    setIsSaved(true);
   }
 
     useEffect(()=> {
@@ -87,27 +89,68 @@ const TrComponent = (props) => {
     
 
     return (
-            <tr>
-                <td>{props.rowId}</td>
-                <td>
-                {/* (e) => setOptionValue(e.target.value) */}
-                <select onChange={ handleChange }>
-                    {species.map((item,index) => (
-                        <option key={`${item._id}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
-                            {item.fish}
-                        </option>
-                    ))}
-                </select>
-                </td>
-                <td><input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc} value={totalPc}></input></td>
-                <td><input type = "number" style={{width: "80px"}} onChange={handleStockingSize} value={stockingSize} ></input></td>
-                <td><input type = "number" style={{width: "80px"}} onChange={handlePresentSize} value={presentSize}></input></td>
-                <td><input type = "number" min="1" max="5"         onChange={handleStockingDensity} value={stockingDensity}></input></td>
-                <td><input type = "number" style={{width: "70px"}} onChange={handleTotalWeight} value={totalWeight}></input></td>
-                <td><input type = "number" style={{width: "80px"}} onChange={handleHarvestSize} value={harvestSize}></input></td>
-                <td><input type = "number" style={{width: "80px"}} onChange={handlePresentBiomass} value={presentBiomass}></input></td>
-                <td><Button type = "submit" onClick={saveRefData} variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button></td>
-            </tr>
+    
+          <tr>
+              <td>{props.rowId}</td>
+              <td>
+                {
+                  isSaved ? fish : 
+                  (
+                    <select onChange={ handleChange }>
+                        {species.map((item,index) => (
+                            <option key={`${item._id}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
+                                {item.fish}
+                            </option>
+                        ))}
+                    </select>
+                  )
+                }
+               
+              </td>
+              <td>
+                {
+                  isSaved ? totalPc : <input type = "number" maxLength = "5" size = "5" min="1" max="5" onChange={handleTotalPc} value={totalPc}></input>
+                }
+              </td>
+              <td>
+                {
+                   isSaved ? stockingSize : <input type = "number" style={{width: "80px"}} onChange={handleStockingSize} value={stockingSize} ></input>
+                }
+              </td>
+              
+              <td>
+                {
+                  isSaved ? presentSize : <input type = "number" style={{width: "80px"}} onChange={handlePresentSize} value={presentSize}></input>
+                }
+              </td>
+              <td>
+                {
+                  isSaved ? stockingDensity : <input type = "number" min="1" max="5" onChange={handleStockingDensity} value={stockingDensity}></input>
+                }
+              </td>
+              <td>
+                {
+                  isSaved ? totalWeight :  <input type = "number" style={{width: "70px"}} onChange={handleTotalWeight} value={totalWeight}></input>
+                }
+              </td>
+              <td>
+                {
+                  isSaved ? harvestSize : <input type = "number" style={{width: "80px"}} onChange={handleHarvestSize} value={harvestSize}></input>
+                }
+              </td>
+              <td>
+                {
+                  isSaved ? presentBiomass : <input type = "number" style={{width: "80px"}} onChange={handlePresentBiomass} value={presentBiomass}></input>
+                }
+              </td>
+              <td>
+                {
+                  isSaved ? <Button type = "submit" disabled  variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button> : 
+                  <Button type = "submit" onClick={saveRefData} variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button>
+                }
+
+              </td>
+          </tr>
     );
 };
 

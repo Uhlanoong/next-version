@@ -171,7 +171,6 @@ const Solution = () => {
                     let max = parseInt(range[0]);
                     let min = parseInt(range[1]);
                     if (singleFishWeight > max && singleFishWeight < min) {
-                       console.log(item);
                        individualFeedingRate = item.feedrate;
                        totalFeedingRate = `${parseInt(feedRange[0])*totalPices} - ${parseInt(feedRange[1])*totalPices}`
                     }
@@ -182,7 +181,35 @@ const Solution = () => {
         return {
             individualFeedingRate,
             totalFeedingRate
+        };
+    }
 
+    const CalculateTotalFeed = (name,totalWeight,totalPices) => {
+        let filteredData = feedingRateData.filter((item) => item.fishtype === name);
+        let singleFishWeight = totalWeight / totalPices;
+        let totalFeedingRate = "";
+        let feedType = "";
+        let frequency = "";
+        filteredData.forEach((item) => {
+            if(item.bodyweight){
+                if(item.bodyweight.charAt(0) !== '>'){
+                    let range = item.bodyweight.split('-');
+                    let feedRange = item.feedrate.split('-');
+                    let max = parseInt(range[0]);
+                    let min = parseInt(range[1]);
+                    if (singleFishWeight > max && singleFishWeight < min) {
+                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight}`;
+                       feedType = item.feedtype;
+                       frequency = item.frequency;
+                    }
+                }
+            }
+        });
+
+        return {
+            totalFeedingRate,
+            feedType,
+            frequency
         };
     }
 
@@ -239,15 +266,15 @@ const Solution = () => {
                     <Table striped bordered hover size="sm" responsive>
                     <thead>
                         <tr>
-                        <th>#</th>
-                        <th>Species</th>
-                        <th>Total Pc</th>
-                        <th>Stk Size(gm)</th>
-                        <th>Psnt Size(gm)</th>
-                        <th>Stk Dty</th>
-                        <th>Ttl Wt(kg)</th>
-                        <th>Hvst Size</th>
-                        <th>Psnt Biomass</th>
+                            <th>#</th>
+                            <th>Species</th>
+                            <th>Total Pc</th>
+                            <th>Stk Size(gm)</th>
+                            <th>Psnt Size(gm)</th>
+                            <th>Stk Dty</th>
+                            <th>Ttl Wt(kg)</th>
+                            <th>Hvst Size</th>
+                            <th>Psnt Biomass</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -293,7 +320,7 @@ const Solution = () => {
                 </Row>
             </Container>
 
-            {
+            {/* {
                 speciesReferenceObj && speciesReferenceObj.map((item,index) => (
                     <Container>
                         <Row>
@@ -322,7 +349,6 @@ const Solution = () => {
                                 Feeding Rate( Individual ): {CalculateFeedingRate(item.fish,item.totalWeight,item.totalPc).individualFeedingRate}
 
                                 <br/>
-                                Feeding Rate( Total {item.totalPc} fish): {CalculateFeedingRate(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}
                                 </p>
 
                               </div>
@@ -330,7 +356,41 @@ const Solution = () => {
                         </Row>
                     </Container>
                 ))
-            }
+            } */}
+
+            <br />
+
+            <Container>
+                <Row>
+                    <Col>
+                        <Table striped bordered hover size="sm" responsive>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Species</th>
+                                <th>Feed Type</th>
+                                <th>Total Feed</th>
+                                <th>Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {
+                                speciesReferenceObj && speciesReferenceObj.map((item,index) => (
+                                    <tr>
+                                        <td>{index+1}</td>
+                                        <td>{item.fish}</td>
+                                        <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>
+                                        <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}</td>
+                                        <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).frequency}</td>
+                                    </tr>
+                                ))                               
+                            }       
+                        </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+            </Container>
            
                     
         </div>
