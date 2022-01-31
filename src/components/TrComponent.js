@@ -74,7 +74,7 @@ const TrComponent = (props) => {
       })
       
       console.log(species);
-    },[]);
+    },[props, species]);
 
     useEffect(() => {
         let newTotalWeight = (totalPc * presentSize) /1000

@@ -110,15 +110,15 @@ const AddData = () => {
             <form onSubmit={handleAddGrowthData}>
                 <input type="text" ref={fishtypeRef} placeholder='Fish Type'/>
                 <input type= "number" ref={ageRef} placeholder='Age'/>
-                <input type= "number" ref={bodyweightRef} placeholder='Body weight'/>
+                <input type= "text" ref={bodyweightRef} placeholder='Body weight'/>
                 <input type= "submit" value="Add"/>
             </form>
             <br/>
             <h3>Feed Table Data</h3>
             <form onSubmit={handleAddFeedData}>
                 <input type="text" ref ={feedfishtypeRef} placeholder='Fish Type'/>
-                <input type="text" ref ={feedtypeRef} placeholder='Age'/>
-                <input type= "number" ref ={feedbodyweightRef} placeholder='Body weight'/>
+                <input type="text" ref ={feedtypeRef} placeholder='Feed type'/>
+                <input type= "text" ref ={feedbodyweightRef} placeholder=' Feed Body weight'/>
                 <input type= "text" ref ={feedrateRef} placeholder='Feed Rate'/>
                 <input type= "number" ref ={frequencyRef} placeholder='Frequency'/>
                 <input type= "submit" value= "Add"/>
