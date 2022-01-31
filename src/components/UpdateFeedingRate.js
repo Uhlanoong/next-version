@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -13,8 +14,6 @@ const UpdateFeedingRate = (props) => {
     const [tempFrequency, setTempFrequency] = useState(0);
     const [tempId, setTempId] = useState('')
 
-
-    
 
     // Feed State
     const [feed, setFeed] = useState([])
@@ -79,9 +78,14 @@ const UpdateFeedingRate = (props) => {
     return (
         <div>
             <>
-                {props.feed.fishtype} :: {props.feed.feedtype} :: {props.feed.bodyweight} :: {props.feed.feedrate} :: {props.feed.frequency}
-                <button onClick={()=>handleUpdateFeed(props.feed._id)}>Update</button>
-                <button onClick={()=>handleDeleteFeedData(props.feed._id)}>Delete</button>
+                <input value = {props.feed.fishtype}/>
+                <input value = {props.feed.feedtype} />
+                <input value = {props.feed.bodyweight}/>
+                <input value = {props.feed.feedrate}/>
+                <input value = {props.feed.frequency}/>
+                <button onClick={()=>handleUpdateFeed(props.feed._id)}
+                variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Update</button>
+                <button onClick={()=>handleDeleteFeedData(props.feed._id)}variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Delete</button>
             </>
             {
                isUpdateState && 

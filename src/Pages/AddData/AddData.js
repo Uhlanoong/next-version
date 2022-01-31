@@ -97,31 +97,39 @@ const AddData = () => {
     }
 
     return (
-        <div>
-            <h3>Species Data</h3>
+        <div className='my-5 py-3'>
+            <h4 className='text-start mx-5'>Species Data</h4>
             <form onSubmit={handleAddData}>
-                <input type="text" ref ={fishRef} placeholder='Species Name'/>
-                <input type= "number" ref ={oxygendemandRef} placeholder='Oxygen Demand'/>
-                <input type= "text" ref ={layerRef} placeholder='Layer Type'/>
-                <input type= "submit" value= "Add"/>
+            <div class="input-group mb-3 px-5">
+                <input class="form-control" type="text" ref ={fishRef} placeholder='Species Name'/>
+                <input class="form-control" type= "number" ref ={oxygendemandRef} placeholder='Oxygen Demand'/>
+                <input class="form-control" type= "text" ref ={layerRef} placeholder='Layer Type'/>
+                <button class="btn btn-outline-primary" type="submit" value="Add">Add</button>
+                
+            </div>    
             </form>
             <br/>
-            <h3>Daily Growth Data</h3>
+            <h4 className='text-start mx-5'>Daily Growth Data</h4>
             <form onSubmit={handleAddGrowthData}>
-                <input type="text" ref={fishtypeRef} placeholder='Fish Type'/>
-                <input type= "number" ref={ageRef} placeholder='Age'/>
-                <input type= "text" ref={bodyweightRef} placeholder='Body weight'/>
-                <input type= "submit" value="Add"/>
+            <div class="input-group mb-3 px-5">
+                <input class="form-control" type="text" ref={fishtypeRef} placeholder='Fish Type'/>
+                <input class="form-control" type= "number" ref={ageRef} placeholder='Age'/>
+                <input class="form-control" type= "text" ref={bodyweightRef} placeholder='Body weight'/>
+                <button class="btn btn-outline-primary" type="submit" value="Add">Add</button>
+            </div>    
             </form>
             <br/>
-            <h3>Feed Table Data</h3>
+            <h4 className='text-start mx-5'>Feed Table Data</h4>
             <form onSubmit={handleAddFeedData}>
-                <input type="text" ref ={feedfishtypeRef} placeholder='Fish Type'/>
-                <input type="text" ref ={feedtypeRef} placeholder='Feed type'/>
-                <input type= "text" ref ={feedbodyweightRef} placeholder=' Feed Body weight'/>
-                <input type= "text" ref ={feedrateRef} placeholder='Feed Rate'/>
-                <input type= "number" ref ={frequencyRef} placeholder='Frequency'/>
-                <input type= "submit" value= "Add"/>
+            <div class="input-group mb-3 px-5">
+               <input class="form-control" type="text" ref ={feedfishtypeRef} placeholder='Fish Type'/>
+                <input class="form-control" type="text" ref ={feedtypeRef} placeholder='Feed type'/>
+                <input class="form-control" type= "text" ref ={feedbodyweightRef} placeholder=' Feed Body weight'/>
+                <input class="form-control" type= "text" ref ={feedrateRef} placeholder='Feed Rate'/>
+                <input class="form-control" type= "number" ref ={frequencyRef} placeholder='Frequency'/>
+                <button class="btn btn-outline-primary" type="submit" value="Add">Add</button>
+            </div>
+                
             </form>
         </div>
     ); 

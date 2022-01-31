@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -61,9 +62,11 @@ const UpdateGrowthRate = (props) => {
     return (
         <div>
             <>
-                {props.growth.fishtype} :: {props.growth.age} :: {props.growth.bodyweight}
-                <button onClick={()=>handleUpdateGrowth(props.growth._id)}>Update</button>
-                <button onClick={()=>handleDeleteGrowthData(props.growth._id)}>Delete</button>
+                <input value = {props.growth.fishtype}  />
+                <input value = {props.growth.age}/>
+                <input value = {props.growth.bodyweight}/> 
+                <button onClick={()=>handleUpdateGrowth(props.growth._id)}variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Update</button>
+                <button onClick={()=>handleDeleteGrowthData(props.growth._id)}variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Delete</button>
             </>
 
             {

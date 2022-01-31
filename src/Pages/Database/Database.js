@@ -29,20 +29,20 @@ const Database = () => {
      }, []);
     
     return (
-        <div>
-            <h2>Species available: {species.length}</h2>
+        <div className='my-3'>
+            <h2 className='my-4'>Species available: {species.length}</h2>
             <>
                 {species.map((species,index)=><UpdateSpecies key={index} species= {species}/>)}
             </>
 
             <br/>
-            <h2>Daily Growth : {growth.length}</h2>
+            <h2 className='my-4'>Daily Growth : {growth.length}</h2>
             <>
                 {growth.map((data,index)=><UpdateGrowthRate key={index} growth= {data}/>)}
             </>
 
             <br/>
-            <h2>Feed Rate: {feed.length}</h2>
+            <h2 className='my-4'>Feed Rate: {feed.length}</h2>
             <>
                {feed.map((data,index)=><UpdateFeedingRate key={index} feed= {data}/>)} 
             </>

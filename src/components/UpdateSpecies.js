@@ -65,7 +65,9 @@ const UpdateSpecies = (props) => {
     return (
         <div>
             <>
-                {props.species.fish} :: {props.species.oxygendemand} ::{props.species.layer}     
+                <input value = {props.species.fish}/>
+                <input value = {props.species.oxygendemand} />
+                <input value = {props.species.layer}/>     
                 <Button onClick={()=>handleUpdateSpecies(props.species._id)} variant = "secondary"className = "mx-2" size = "sm" style = {{width: "100px"}}>Update</Button>
                 <Button onClick={()=>handleDeleteData(props.species._id)}variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Delete</Button>
             </>
