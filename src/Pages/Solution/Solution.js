@@ -3,10 +3,9 @@
 import React, { useEffect, useState,} from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import './Solution.css';
-// import TextField from '@mui/material/TextField';
-// import Autocomplete from '@mui/material/Autocomplete';
 import Results from '../Age/Results';
 import TrComponent from '../../components/TrComponent';
+import { Autocomplete, TextField } from '@mui/material';
 
 const Solution = () => {
     // Output formula
@@ -214,10 +213,10 @@ const Solution = () => {
 
      
     return (
-        <div className = "my-2">
+        <div className = "py-5 cal">
             <Container>
                 <Row>
-                    <Col sm = {9}>
+                    <Col>
                     <Form>
                     <Row className="mb-3">
                         <div className="mb-2">
@@ -229,23 +228,32 @@ const Solution = () => {
                         <Form.Group as={Col} controlId="formGridWaterDepth">
                         <Form.Control type="number" placeholder="Water Depth" onChange={(e)=>setWaterDepth(e.target.value)} />
                         </Form.Group>
+                        <Form.Group as={Col} controlId="formGridWaterVolume">
+                        <Form.Control type="number" placeholder="Water Volume" value={volume}/>
+                        </Form.Group>
                         
-                        <Form.Group as={Col} controlId="formGridProblembatic Species">
-                        <select>
+                        
+                    </Row>
+
+                    <Row className="mb-3">
+                    <Form.Group as={Col} controlId="formGridProblembatic Species">
+                        <Autocomplete
+                        disablePortal
+                        id=""
+                        options={fish}
+                        sx={{ width: 260}}
+                        renderInput={(params) => <TextField {...params} label="Problematic Species" size = "small"/>}
+                        />
+                        {/* <select>
                             {species.map((item,index) => (
                                 <option key={`${item._id}`} value={`${item.fish}-${item.oxygendemand}-${item.layer}`}>
                                     {item.fish}
                                 </option>
                             ))}
-                        </select>
+                        </select> */}
                         </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-
                         <Form.Group as={Col} controlId="formStockingDate">
                         <Form.Control type="date" placeholder="Stocking Date" onChange={changeHandler}/>
-                        </Form.Group>
                         <>
                         {data.showResults ? <Results date={data.stockingdate} /> : <div />}
                         </>
@@ -255,6 +263,8 @@ const Solution = () => {
                             <Form.Control type="text" readOnly placeholder="Age" value={CalculateAge(data.date)}/>
                           </Form.Group>
                         }
+                        </Form.Group>
+                        
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
                         <Form.Control type = "number" placeholder = "Stocking Quantity" />
                         </Form.Group>
@@ -295,8 +305,10 @@ const Solution = () => {
                     </Col>
 
                     <Col sm = {3} className = "text-start">
-                    <p>Species Name: {fish}</p>
-                    <p>The Water Volume is : {volume} m<sup>3</sup>
+                    <div className=''>
+                    <p>Species Name: {fish} 
+                    <br/>
+                    The Water Volume is : {volume} m<sup>3</sup>
                     <br/>
                     O<sub>2</sub> Production: {production} mg/hr
                     <br/>
@@ -312,50 +324,15 @@ const Solution = () => {
                     <br/>
                     Total O<sub>2</sub> demand: {totalOxygenDemand} mg
                     </p>
+                    </div>
+                    
+                    
                     </Col>
                     <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
                     <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
                     <br/>
                 </Row>
             </Container>
-
-            {/* {
-                speciesReferenceObj && speciesReferenceObj.map((item,index) => (
-                    <Container>
-                        <Row>
-                            <Col>
-                              <div>
-                                <p>Species Name: {item.fish}</p>
-                                <p>The Water Volume is : {item.volume} m<sup>3</sup>
-                                <br/>
-                                O<sub>2</sub> Production: {item.production} mg/hr
-                                <br/>
-                                O<sub>2</sub> demand: {item.oxygendemand} mg
-                                <br/>
-                                harvest O<sub>2</sub> demand:{item.harvestOxygenDemand}mg
-                                <br/>
-                                Zonewise Fish Distribution:
-                                {item.feedingLayer}   
-                                <br/>
-                                Total Pieces : {item.totalPc}
-                                <br/>
-                                Total Weight: {item.totalWeight} kg
-
-                                <br/>
-                                Individual Weight: {parseInt(item.totalWeight)/parseInt(item.totalPc)} kg
-
-                                <br/>
-                                Feeding Rate( Individual ): {CalculateFeedingRate(item.fish,item.totalWeight,item.totalPc).individualFeedingRate}
-
-                                <br/>
-                                </p>
-
-                              </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                ))
-            } */}
 
             <br />
 
@@ -395,7 +372,7 @@ const Solution = () => {
         </div>
     );
 };
-const fish = [
+const problematicfish = [
   
     { label: 'Tilapia',},{ label: 'Pangasius',},{ label: 'Rui',},
     { label: 'Mrigel',},{ label: 'Koi',},{ label: 'Catla',},

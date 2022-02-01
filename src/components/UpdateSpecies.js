@@ -78,7 +78,7 @@ const UpdateSpecies = (props) => {
                 <input type="text" onChange={(e)=>{setTempFish(e.target.value)}} value={tempFish}/>
                 <input type="number" onChange={(e)=>{setTempOxygenDemand(e.target.value)}} value={tempOxygenDemand}/>
                 <input type="text" onChange={(e)=>{setTempLayer(e.target.value)}} value={tempLayer}/>
-                <button onClick={()=>updateSpecies(tempId)}>Update</button>
+                <Button onClick={()=>updateSpecies(tempId)}>Update</Button>
             </div>
             }
         </div>

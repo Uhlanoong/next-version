@@ -1,12 +1,10 @@
-
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 const UpdateFeedingRate = (props) => {
     const [isUpdateState, setIsUpdateState] = useState(false);
-    // const [tempFish, setTempFish] = useState('')
-    // const [tempOxygenDemand, setTempOxygenDemand] = useState(0);
     const [tempFishType, setTempFishType] = useState('')
     const [tempBodyWeight, setTempBodyWeight] = useState(0);
     const [tempFeedType, setTempFeedType] = useState('');
@@ -83,9 +81,9 @@ const UpdateFeedingRate = (props) => {
                 <input value = {props.feed.bodyweight}/>
                 <input value = {props.feed.feedrate}/>
                 <input value = {props.feed.frequency}/>
-                <button onClick={()=>handleUpdateFeed(props.feed._id)}
-                variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Update</button>
-                <button onClick={()=>handleDeleteFeedData(props.feed._id)}variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Delete</button>
+                <Button onClick={()=>handleUpdateFeed(props.feed._id)}
+                variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Update</Button>
+                <Button onClick={()=>handleDeleteFeedData(props.feed._id)}variant = "secondary" className = "mx-2" size = "sm" style = {{width: "100px"}}>Delete</Button>
             </>
             {
                isUpdateState && 
@@ -95,7 +93,7 @@ const UpdateFeedingRate = (props) => {
                     <input type="number" onChange={(e)=>{setTempBodyWeight(e.target.value)}} value={tempBodyWeight}/>
                     <input type="text" onChange={(e)=>{setTempFeedRate(e.target.value)}} value={tempFeedRate}/>
                     <input type="number" onChange={(e)=>{setTempFrequency(e.target.value)}} value={tempFrequency}/>
-                    <button onClick={()=>updateFeed()}>Update</button>
+                    <Button onClick={()=>updateFeed()}>Update</Button>
                 </div>
             }
         </div>
