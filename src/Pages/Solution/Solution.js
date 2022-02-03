@@ -344,19 +344,17 @@ const Solution = () => {
                     <br/>
                     <b>The Water Volume is :</b> {volume} m<sup>3</sup>
                     <br/>
-                    O<sub>2</sub> Production: {production} mg/hr
+                    <b>O<sub>2</sub> Production:</b> {production} mg/hr
                     <br/>
-                    O<sub>2</sub> demand: {oxygendemand} mg
+                    <b>O<sub>2</sub> demand:</b> {oxygendemand} mg
                     <br/>
-                    harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
+                    <b>Harvest O<sub>2</sub> demand:</b> {harvestOxygenDemand}mg
                     <br/>
-                    Zonewise Fish Distribution:
-                      <br/>
-                     {feedingLayer}
-                     <br />
-                    Total Harvest O<sub>2</sub> demand: {totalHarvestOxygenDemand} mg/hr
+                    <b>Layer:</b> {feedingLayer}
+                    <br />
+                    <b>Total Harvest O<sub>2</sub> demand:</b> {totalHarvestOxygenDemand} mg/hr
                     <br/>
-                    Total O<sub>2</sub> demand: {totalOxygenDemand} mg
+                    <b>Total O<sub>2</sub> demand:</b> {totalOxygenDemand} mg
                     </p>
                     </div>
                     
