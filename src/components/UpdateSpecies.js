@@ -54,7 +54,7 @@ const UpdateSpecies = (props) => {
             })
       }
       // Handle Update Species
-        const handleUpdateSpecies = ()=>{
+    const handleUpdateSpecies = ()=>{
         setTempId(props.species._id)
         setIsUpdateState(true);
         setTempFish(props.species.fish);

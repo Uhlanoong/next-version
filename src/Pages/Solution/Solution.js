@@ -83,7 +83,7 @@ const Solution = () => {
         setTotalOxygenDemand(oxygendemandSum);
         setTotalHarvestOxygenDemand(harvestOxygenDemandSum);
 
-    },[speciesReferenceObj])
+    },[])
     
     const handlePresentSize = (e)=>{
         setPresentSize(e.target.value)
@@ -180,6 +180,10 @@ const Solution = () => {
             individualFeedingRate,
             totalFeedingRate
         };
+    }
+
+    const calculationReset = () => {
+        window.location.reload();
     }
 
     const CalculateTotalFeed = (name,totalWeight,totalPices) => {
@@ -331,6 +335,11 @@ const Solution = () => {
                     <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
                     <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
                     <br/>
+                </Row>
+                <Row> 
+                  <Col>
+                       <Button type = "button" onClick={() => calculationReset()} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Calculation Reset</Button>
+                  </Col>
                 </Row>
             </Container>
 
