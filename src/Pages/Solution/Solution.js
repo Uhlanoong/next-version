@@ -207,7 +207,7 @@ const Solution = () => {
                     let max = parseInt(range[0]);
                     let min = parseInt(range[1]);
                     if (singleFishWeight > max && singleFishWeight < min) {
-                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight*1000}`;
+                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight /1000}`;
                        feedType = item.feedtype;
                        frequency = item.frequency;
                     }
@@ -325,7 +325,7 @@ const Solution = () => {
                                 <th>#</th>
                                 <th>Species</th>
                                 <th>Feed Type</th>
-                                <th>Total Feed</th>
+                                <th>Total Feed(kg)</th>
                                 <th>Frequency</th>
                             </tr>
                         </thead>
@@ -352,17 +352,17 @@ const Solution = () => {
                     <br/>
                     <b>The Water Volume is :</b> {volume} m<sup>3</sup>
                     <br/>
-                    <b>O<sub>2</sub> Production:</b> {production} mg/hr
+                    <b>O<sub>2</sub> Production:</b> {production} mg/hr/L
                     <br/>
-                    <b>O<sub>2</sub> demand:</b> {oxygendemand} mg
+                    <b>O<sub>2</sub> demand:</b> {oxygendemand} mg/kg/hr
                     <br/>
-                    <b>Harvest O<sub>2</sub> demand:</b> {harvestOxygenDemand}mg
+                    <b>Harvest O<sub>2</sub> demand:</b> {harvestOxygenDemand}mg/kg/hr
                     <br/>
                     <b>Layer:</b> {feedingLayer}
                     <br />
-                    <b>Total Harvest O<sub>2</sub> demand:</b> {totalHarvestOxygenDemand} mg/hr
+                    <b>Total Harvest O<sub>2</sub> demand:</b> {totalHarvestOxygenDemand} mg/kg/hr
                     <br/>
-                    <b>Total O<sub>2</sub> demand:</b> {totalOxygenDemand} mg
+                    <b>Total O<sub>2</sub> demand:</b> {totalOxygenDemand} mg/kg/hr
                     </p>
                     </div>
                     
