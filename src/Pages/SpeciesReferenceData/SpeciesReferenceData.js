@@ -51,6 +51,25 @@ const SpeciesReferenceData = () => {
         };
     }
 
+        //Delete a data for Species
+        const handleDeleteData = id =>{
+            const proceed = window.confirm('Are you sure, you want to delete?')
+            if (proceed){
+              const url = `http://localhost:5000/species-reference/${id}`;
+              fetch(url, {
+                  method: 'DELETE'
+              })
+              .then(res=> res.json())
+                .then(data =>{
+                    if(data.deletedCount>0){
+                        alert('Successfully deleted the data')
+                        window.location.reload()
+                    }
+                })
+            } 
+        }
+    
+
     return (
         <div className = "my-2">
              <Container>
@@ -64,6 +83,7 @@ const SpeciesReferenceData = () => {
                                 <th>Feed Type</th>
                                 <th>Total Feed</th>
                                 <th>Frequency</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,6 +96,7 @@ const SpeciesReferenceData = () => {
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).frequency}</td>
+                                        <td><Button type = "button" onClick={() => {handleDeleteData(item._id)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button></td>
                                     </tr>
                                 ))                               
                             }       
