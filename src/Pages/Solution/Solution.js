@@ -82,7 +82,7 @@ const Solution = () => {
         }
         setTotalOxygenDemand(oxygendemandSum);
         setTotalHarvestOxygenDemand(harvestOxygenDemandSum);
-    },[])
+    },[speciesReferenceObj])
     
     const handlePresentSize = (e)=>{
         setPresentSize(e.target.value)
@@ -243,7 +243,7 @@ const Solution = () => {
                         <Autocomplete
                         disablePortal
                         id=""
-                        options={fish}
+                        options={problematicfish}
                         sx={{ width: 260}}
                         renderInput={(params) => <TextField {...params} label="Problematic Species" size = "small"/>}
                         />
@@ -305,6 +305,10 @@ const Solution = () => {
                           
                     </tbody>
                     </Table>
+                    <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
+                    <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
+                    <Button type = "button" onClick={() => calculationReset()} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Reset</Button>
+
                     </Col>
 
                     <Col sm = {3} className = "text-start">
@@ -331,15 +335,8 @@ const Solution = () => {
                     
                     
                     </Col>
-                    <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
-                    <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
-                    <br/>
                 </Row>
-                <Row> 
-                  <Col>
-                       <Button type = "button" onClick={() => calculationReset()} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Calculation Reset</Button>
-                  </Col>
-                </Row>
+                
             </Container>
 
             <br />
