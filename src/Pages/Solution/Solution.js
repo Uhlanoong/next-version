@@ -11,8 +11,8 @@ const Solution = () => {
     // Output formula
     const [waterArea, setWaterArea] = useState(0);
     const [waterDepth, setWaterDepth] = useState(0);
-    const [volume, setVolume] = useState('');
-    const [production, setProduction] = useState('');
+    const [volume, setVolume] = useState(0);
+    const [production, setProduction] = useState(0);
     const [oxygendemand, setOxygenDemand] = useState(0);
     const [harvestOxygenDemand, setHarvestOxygenDemand] = useState(0);
     const [totalOxygenDemand, setTotalOxygenDemand] = useState(0);
@@ -20,6 +20,8 @@ const Solution = () => {
     const [speciesReferenceObj, setSpeciesReferenceObj] = useState([]);
     const [tempSpeciesReferenceObj, setTempSpeciesReferenceObj] = useState([]);
     const [fish,setFish] = useState("");
+    const [problem, setProblem] = useState("");
+    const [stockingQuantity, setStockingQuantity] = useState(0);
 
 
     //Table formula
@@ -31,6 +33,7 @@ const Solution = () => {
     const [presentBiomass, setPresentBiomass] = useState('');
     const [feedingLayer, setFeedingLayer] = useState('');
     const [species, setSpecies] = useState([]);
+    const [age, setAge] = useState(0);
 
     const [rows, setRows] = useState(1);
 
@@ -38,15 +41,25 @@ const Solution = () => {
     
 
     const handleSaveData = (obj) =>{
+
+      
       const resObj = {
           ...obj,
           production,
           volume,
-          stockingDensity,
-          presentBiomass,
+          stockingDensity: obj.totalPc / waterArea,
+          presentBiomass: obj.totalWeight / waterArea,
           feedingLayer,
           oxygendemand,
-          harvestOxygenDemand
+          harvestOxygenDemand,
+          firstTableDataObj: {
+              waterArea,
+              waterDepth,
+              volume,
+              age,
+              problem,
+              stockingQuantity,
+          }
       };
   
         fetch('http://localhost:5000/species-reference',{
@@ -155,10 +168,12 @@ const Solution = () => {
     const CalculateAge = (inputDate) => {
       var diffInTime = new Date(inputDate).getTime() - new Date().getTime();
       var days = Math.ceil(diffInTime / (1000 * 3600 * 24));
-      return Math.abs(days);
+      setAge(Math.abs(days));
+    //   return Math.abs(days);
     };
     const changeHandler = (e) => {
       setData({ date: e.target.value });
+      CalculateAge( e.target.value);
     };
 
     
@@ -231,7 +246,7 @@ const Solution = () => {
                     <Form>
                     <Row className="mb-3">
                         <div className="mb-2">
-                        <textarea className="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        <textarea className="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1" value={problem} onChange={(e) => setProblem(e.target.value)}></textarea>
                         </div>
                         <Form.Group as={Col} controlId="formGridWaterArea">
                         <Form.Control type="number" placeholder="Water Area" onChange={(e)=>setWaterArea(e.target.value)}/>
@@ -271,13 +286,13 @@ const Solution = () => {
                         {
                           data.date !== '' &&  
                           <Form.Group as={Col} controlId="formCalculation">
-                            <Form.Control type="text" readOnly placeholder="Age" value={CalculateAge(data.date)}/>
+                            <Form.Control type="text" readOnly placeholder="Age" value={age}/>
                           </Form.Group>
                         }
                         </Form.Group>
                         
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
-                        <Form.Control type = "number" placeholder = "Stocking Quantity" />
+                        <Form.Control type = "number" placeholder = "Stocking Quantity" value={stockingQuantity} onChange={(e) => setStockingQuantity(e.target.value)}/>
                         </Form.Group>
                         
                     </Row>
