@@ -38,9 +38,15 @@ const UpdateSpecies = (props) => {
         } 
     }
 
+
+
       const updateSpecies =()=>{
+
+        console.log();
+
+
         
-        const url = `http://localhost:5000/species/${tempId}/${tempFish}/${tempOxygenDemand}`;
+        const url = `http://localhost:5000/species/${tempId}/${tempFish}/${tempOxygenDemand}/${tempLayer.split("/").join("-")}`;
           fetch(url, {
               method: 'PUT'
           })
@@ -59,7 +65,7 @@ const UpdateSpecies = (props) => {
         setIsUpdateState(true);
         setTempFish(props.species.fish);
         setTempOxygenDemand(props.species.oxygendemand);
-        
+        setTempLayer(props.species.layer);
       }
 
     return (

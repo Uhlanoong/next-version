@@ -82,7 +82,6 @@ const Solution = () => {
         }
         setTotalOxygenDemand(oxygendemandSum);
         setTotalHarvestOxygenDemand(harvestOxygenDemandSum);
-
     },[])
     
     const handlePresentSize = (e)=>{
