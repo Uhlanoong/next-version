@@ -90,7 +90,7 @@ const SpeciesReferenceData = () => {
 
                             {
                                 speciesReferenceObj && speciesReferenceObj.map((item,index) => (
-                                    <tr>
+                                    <tr key={item._id}>
                                         <td>{index+1}</td>
                                         <td>{item.fish}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>

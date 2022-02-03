@@ -18,6 +18,7 @@ const Solution = () => {
     const [totalOxygenDemand, setTotalOxygenDemand] = useState(0);
     const [totalHarvestOxygenDemand, setTotalHarvestOxygenDemand] = useState(0);
     const [speciesReferenceObj, setSpeciesReferenceObj] = useState([]);
+    const [tempSpeciesReferenceObj, setTempSpeciesReferenceObj] = useState([]);
     const [fish,setFish] = useState("");
 
 
@@ -55,7 +56,13 @@ const Solution = () => {
             },
             body: JSON.stringify(resObj)
         })
+
+        let newTempObj = [...tempSpeciesReferenceObj,resObj]
+
+        setTempSpeciesReferenceObj(newTempObj);
     }
+
+    console.log(tempSpeciesReferenceObj);
 
     useEffect(()=>{
         fetch('http://localhost:5000/species-reference')
@@ -76,13 +83,14 @@ const Solution = () => {
     useEffect(()=>{
         let oxygendemandSum = 0;
         let harvestOxygenDemandSum = 0;
-        for(var i = 0; i < speciesReferenceObj.length ; i++){
-            oxygendemandSum += speciesReferenceObj[i].oxygendemand;
-            harvestOxygenDemandSum += speciesReferenceObj[i].harvestOxygenDemand;
+        for(var i = 0; i < tempSpeciesReferenceObj.length ; i++){
+            oxygendemandSum += tempSpeciesReferenceObj[i].oxygendemand;
+            harvestOxygenDemandSum += tempSpeciesReferenceObj[i].harvestOxygenDemand;
         }
         setTotalOxygenDemand(oxygendemandSum);
         setTotalHarvestOxygenDemand(harvestOxygenDemandSum);
-    },[speciesReferenceObj])
+    },[tempSpeciesReferenceObj])
+
     
     const handlePresentSize = (e)=>{
         setPresentSize(e.target.value)
