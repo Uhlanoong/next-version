@@ -308,43 +308,10 @@ const Solution = () => {
                     <Button type = "button" onClick={() => {setRows(rows+1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Add New</Button>
                     <Button type = "button" onClick={() => {setRows(rows-1)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button>
                     <Button type = "button" onClick={() => calculationReset()} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Reset</Button>
-
-                    </Col>
-
-                    <Col sm = {3} className = "text-start">
-                    <div className=''>
-                    <p>Species Name: {fish} 
-                    <br/>
-                    The Water Volume is : {volume} m<sup>3</sup>
-                    <br/>
-                    O<sub>2</sub> Production: {production} mg/hr
-                    <br/>
-                    O<sub>2</sub> demand: {oxygendemand} mg
-                    <br/>
-                    harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
-                    <br/>
-                    Zonewise Fish Distribution:
-                      <br/>
-                     {feedingLayer}
-                     <br />
-                    Total Harvest O<sub>2</sub> demand: {totalHarvestOxygenDemand} mg/hr
-                    <br/>
-                    Total O<sub>2</sub> demand: {totalOxygenDemand} mg
-                    </p>
-                    </div>
                     
-                    
-                    </Col>
-                </Row>
-                
-            </Container>
-
-            <br />
-
-            <Container>
-                <Row>
-                    <Col>
-                        <Table striped bordered hover size="sm" responsive>
+                    <br/>
+                    <br/>
+                    <Table striped bordered hover size="sm" responsive>
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -370,7 +337,32 @@ const Solution = () => {
                         </tbody>
                         </Table>
                     </Col>
+
+                    <Col sm = {3} className = "text-start">
+                    <div className=''>
+                    <p><b>Species Name:</b> {fish} 
+                    <br/>
+                    <b>The Water Volume is :</b> {volume} m<sup>3</sup>
+                    <br/>
+                    O<sub>2</sub> Production: {production} mg/hr
+                    <br/>
+                    O<sub>2</sub> demand: {oxygendemand} mg
+                    <br/>
+                    harvest O<sub>2</sub> demand:{harvestOxygenDemand}mg
+                    <br/>
+                    Zonewise Fish Distribution:
+                      <br/>
+                     {feedingLayer}
+                     <br />
+                    Total Harvest O<sub>2</sub> demand: {totalHarvestOxygenDemand} mg/hr
+                    <br/>
+                    Total O<sub>2</sub> demand: {totalOxygenDemand} mg
+                    </p>
+                    </div>
+                    
+                    </Col>
                 </Row>
+                
             </Container>
            
                     
