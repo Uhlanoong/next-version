@@ -108,16 +108,16 @@ const Solution = () => {
       },[]);
 
     useEffect(()=>{
-        let cubic = parseFloat(28.32).toFixed(2)
+        let cubic = parseFloat("28.32").toFixed(2)
         let newVolume = waterArea * waterDepth * cubic
-        setVolume(newVolume)
+        setVolume(newVolume.toFixed(2))
     }, [waterArea, waterDepth])
     
     useEffect(() => {
         let range = parseFloat("1.45830299").toFixed(2);
         let cubic = parseFloat("28.32").toFixed(2)
         let newVolume = waterArea * waterDepth * cubic
-        setVolume(newVolume)
+        setVolume(newVolume.toFixed(2))
         let oxygenProduction = newVolume* range
         setProduction(oxygenProduction.toFixed(2))
     }, [waterArea, waterDepth, production]);
