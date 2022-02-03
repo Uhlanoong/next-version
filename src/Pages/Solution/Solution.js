@@ -332,8 +332,8 @@ const Solution = () => {
                         <tbody>
 
                             {
-                                speciesReferenceObj && speciesReferenceObj.map((item,index) => (
-                                    <tr>
+                                tempSpeciesReferenceObj && tempSpeciesReferenceObj.map((item,index) => (
+                                    <tr key={index}>
                                         <td>{index+1}</td>
                                         <td>{item.fish}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>
