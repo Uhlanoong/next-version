@@ -69,8 +69,8 @@ const TrComponent = (props) => {
         setSpecies(data);
         // props.ChangedFish(data[0].fish);
         // props.ChangedFeedingLayer(data[0].layer);
-        setOptionValue(parseInt(data[0].oxygendemand))
-        setFish(data[0].fish)
+        // setOptionValue(parseInt(data[0].oxygendemand))
+        // setFish(data[0].fish)
       })
       
       console.log(species);

@@ -207,7 +207,7 @@ const Solution = () => {
                     let max = parseInt(range[0]);
                     let min = parseInt(range[1]);
                     if (singleFishWeight > max && singleFishWeight < min) {
-                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight}`;
+                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight*1000}`;
                        feedType = item.feedtype;
                        frequency = item.frequency;
                     }
