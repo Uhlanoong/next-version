@@ -44,24 +44,7 @@ function Results({ date }) {
 
     </>
     
-    // <div align='right'>
-    //         Age in Months:
-    //         <br />
-    //         {AllMonths} Months, {days} Days
-    //  </div>
     
-    // <div className='Stats border'>
-    //   <div className='card'>
-    //     <div className='card-body'>
-          
-          
-    //       {/* <div align='center'>Age in Days: {AllDays} Days</div> */}
-    //       {/* <div align='center'>Age in Hours: {hours} </div>
-    //       <div align='center'>Age in Minutes: {minutes} </div>
-    //       <div align='center'>Age in Seconds: {seconds} </div> */}
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 export default Results;

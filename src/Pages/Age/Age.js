@@ -45,16 +45,5 @@ const Age = () => {
 };
 
 export default Age;
- 
 
-
-// document.getElementById("calc").addEventListener("click",function(){
-  
-//     var myDate = new Date(document.getElementById("date").value),
-//       milli = myDate.getTime(),
-//       newDate = new Date(),
-//       newMilli = newDate.getTime();
-    
-//     document.getElementById("demo").innerHTML = Math.floor((newMilli - milli) / 1000 / 60 / 60 / 24 / 30 / 12); 
-//   });
      

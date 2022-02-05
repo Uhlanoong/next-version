@@ -8,11 +8,13 @@ const TrComponent = (props) => {
     const [totalPc, setTotalPc] = useState(0);
     const [stockingSize, setStockingSize] = useState(0);
     const [presentSize, setPresentSize] = useState(0);
-    const [stockingDensity, setStockingDensity] = useState('');
-    const [totalWeight, setTotalWeight] = useState('')
+    const [stockingDensity, setStockingDensity] = useState(0);
+    const [totalWeight, setTotalWeight] = useState(0)
     const [harvestSize, setHarvestSize] = useState(0);
-    const [presentBiomass, setPresentBiomass] = useState('');
+    const [presentBiomass, setPresentBiomass] = useState(0);
     const [fish, setFish] = useState('');
+    // eslint-disable-next-line no-unused-vars
+    const [waterArea, setWaterArea] = useState(0);
 
     const [isSaved, setIsSaved] = useState(false);
 
@@ -81,8 +83,16 @@ const TrComponent = (props) => {
       let harvestTotalWeight = (totalPc * harvestSize) /1000;
        props.ChangedHarvestOxygenDemand(harvestTotalWeight * optionValue); 
     }, [totalPc, harvestSize, optionValue, props])
-    
 
+    useEffect(() => {
+      let newStockingDensity = totalPc / waterArea
+      setStockingDensity(newStockingDensity)
+   }, [totalPc, waterArea]);
+    
+    useEffect(() => {
+      let newPresentBiomass = totalWeight /waterArea
+      setPresentBiomass(newPresentBiomass)
+  }, [totalWeight, waterArea]);
     return (
     
           <tr>
@@ -120,7 +130,7 @@ const TrComponent = (props) => {
               </td>
               <td>
                 {
-                  isSaved ? stockingDensity : <input type = "number" min="1" max="5" onChange={handleStockingDensity} value={stockingDensity}></input>
+                  isSaved ? stockingDensity : <input type = "number" style={{width: "60px"}} onChange={handleStockingDensity} value={stockingDensity}></input>
                 }
               </td>
               <td>

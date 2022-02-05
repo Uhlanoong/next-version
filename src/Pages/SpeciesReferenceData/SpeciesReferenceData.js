@@ -53,7 +53,7 @@ const SpeciesReferenceData = () => {
                     let max = parseInt(range[0]);
                     let min = parseInt(range[1]);
                     if (singleFishWeight > max && singleFishWeight < min) {
-                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight}`;
+                       totalFeedingRate = `${parseInt(feedRange[0])*totalWeight/1000}`;
                        feedType = item.feedtype;
                        frequency = item.frequency;
                     }
@@ -100,10 +100,14 @@ const SpeciesReferenceData = () => {
                                 <th>Feed Type</th>
                                 <th>Total Feed</th>
                                 <th>Frequency</th>
+                                <th>Total Pc</th>
+                                <th>Present Size</th>
+                                <th>Total wt</th>
+                                <th>Harvest Size</th>
                                 <th>Stocking Density</th>
                                 <th>Present Biomass</th>
-                                <th>First Table Reference</th>
                                 <th>Delete</th>
+                                <th>Show</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,9 +120,13 @@ const SpeciesReferenceData = () => {
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).frequency}</td>
+                                        <td>{item.totalPc}</td>
+                                        <td>{item.presentSize}</td>
+                                        <td>{item.totalWeight}</td>
+                                        <td>{item.harvestSize}</td>
                                         <td>{item.stockingDensity}</td>
                                         <td>{item.presentBiomass}</td>
-                                        <td><Button type = "button" onClick={() => {handleDeleteData(item._id)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "100px"}}>Remove</Button></td>
+                                        <td><Button type = "button" onClick={() => {handleDeleteData(item._id)}} variant = "info" className = "mx-2" size = "sm" style = {{width: "60px"}}>Del</Button></td>
                                         <td>
                                             <Button variant="primary" onClick={(e) => handleShow(e,item) }>
                                                 See
@@ -150,6 +158,8 @@ const SpeciesReferenceData = () => {
                                             <th>Water Depth</th>
                                             <th>Stocking Quantity</th>
                                             <th>Water Volume</th>
+                                            <th>O<sub>2</sub> Production</th>
+                                            <th>O<sub>2</sub> Demand</th>
                                         </tr>
                                     </thead>
                                    {
@@ -160,6 +170,8 @@ const SpeciesReferenceData = () => {
                                         <td>{tempModalData.waterDepth}</td>
                                         <td>{tempModalData.stockingQuantity}</td>
                                         <td>{tempModalData.volume}</td>
+                                        <td>{tempModalData.production}</td>
+                                        <td>{tempModalData.oxygendemand}</td>
                                     </tbody>
                                    }
                                </Table>

@@ -26,11 +26,11 @@ const Solution = () => {
 
     //Table formula
     const [totalPc, setTotalPc] = useState(null);
-    const [stockingDensity, setStockingDensity] = useState(null);
+    const [stockingDensity, setStockingDensity] = useState(0);
     const [presentSize, setPresentSize] = useState(null)
     
     const [totalWeight, setTotalWeight] = useState('')
-    const [presentBiomass, setPresentBiomass] = useState('');
+    const [presentBiomass, setPresentBiomass] = useState(0);
     const [feedingLayer, setFeedingLayer] = useState('');
     const [species, setSpecies] = useState([]);
     const [age, setAge] = useState(0);
@@ -47,8 +47,8 @@ const Solution = () => {
           ...obj,
           production,
           volume,
-          stockingDensity: obj.totalPc / waterArea,
-          presentBiomass: obj.totalWeight / waterArea,
+          stockingDensity: (obj.totalPc / waterArea).toFixed(2),
+          presentBiomass: (obj.totalWeight / waterArea).toFixed(2),
           feedingLayer,
           oxygendemand,
           harvestOxygenDemand,
@@ -59,6 +59,8 @@ const Solution = () => {
               age,
               problem,
               stockingQuantity,
+              production,
+              oxygendemand,
           }
       };
   
