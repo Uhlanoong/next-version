@@ -21,7 +21,7 @@ const Solution = () => {
     const [tempSpeciesReferenceObj, setTempSpeciesReferenceObj] = useState([]);
     const [fish,setFish] = useState("");
     const [problem, setProblem] = useState("");
-    const [stockingQuantity, setStockingQuantity] = useState(0);
+    const [stockingQuantity, setStockingQuantity] = useState(null);
 
 
     //Table formula
@@ -256,15 +256,7 @@ const Solution = () => {
                         <Form.Group as={Col} controlId="formGridWaterDepth">
                         <Form.Control type="number" placeholder="Water Depth" onChange={(e)=>setWaterDepth(e.target.value)} />
                         </Form.Group>
-                        <Form.Group as={Col} controlId="formGridWaterVolume">
-                        <Form.Control type="number" placeholder="Water Volume" value={volume}/>
-                        </Form.Group>
-                        
-                        
-                    </Row>
-
-                    <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formGridProblembatic Species">
+                        <Form.Group as={Col} controlId="formGridProblembatic Species">
                         <Autocomplete
                         disablePortal
                         id=""
@@ -279,7 +271,13 @@ const Solution = () => {
                                 </option>
                             ))}
                         </select> */}
-                        </Form.Group>
+                    </Form.Group>
+                        
+                        
+                    </Row>
+
+                    <Row className="mb-3">
+                    
                         <Form.Group as={Col} controlId="formStockingDate">
                         <Form.Control type="date" placeholder="Stocking Date" onChange={changeHandler}/>
                         <>
@@ -291,6 +289,9 @@ const Solution = () => {
                             <Form.Control type="text" readOnly placeholder="Age" value={age}/>
                           </Form.Group>
                         }
+                        </Form.Group>
+                        <Form.Group as = {Col}>
+                            <Form.Control type='number' placeholder='Culture Period (days)'></Form.Control>
                         </Form.Group>
                         
                         <Form.Group as={Col} controlId="formGridStockingQuantity">
@@ -305,13 +306,15 @@ const Solution = () => {
                         <tr>
                             <th>#</th>
                             <th>Species</th>
-                            <th>Total Pc</th>
-                            <th>Stk Size(gm)</th>
-                            <th>Psnt Size(gm)</th>
-                            <th>Stk Dty</th>
-                            <th>Ttl Wt(kg)</th>
-                            <th>Hvst Size</th>
-                            <th>Psnt Biomass</th>
+                            <th>Total Piece</th>
+                            <th>Stocking Size(gm)</th>
+                            <th>Present Size(gm)</th>
+                            <th>Standard Size(gm)</th>
+                            <th>Stocking Density</th>
+                            <th>Total Wt(kg)</th>
+                            <th>Harvest Size(gm)</th>
+                            <th>Present Biomass</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

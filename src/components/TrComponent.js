@@ -119,13 +119,18 @@ const TrComponent = (props) => {
               </td>
               <td>
                 {
-                   isSaved ? stockingSize : <input type = "number" style={{width: "80px"}} onChange={handleStockingSize} value={stockingSize} ></input>
+                   isSaved ? stockingSize : <input type = "number" style={{width: "60px"}} onChange={handleStockingSize} value={stockingSize} ></input>
                 }
               </td>
               
               <td>
                 {
-                  isSaved ? presentSize : <input type = "number" style={{width: "80px"}} onChange={handlePresentSize} value={presentSize}></input>
+                  isSaved ? presentSize : <input type = "number" style={{width: "60px"}} onChange={handlePresentSize} value={presentSize}></input>
+                }
+              </td>
+              <td>
+                {
+                  <input type= "number" style={{width:"60px"}}/>
                 }
               </td>
               <td>
@@ -145,13 +150,13 @@ const TrComponent = (props) => {
               </td>
               <td>
                 {
-                  isSaved ? presentBiomass : <input type = "number" style={{width: "80px"}} onChange={handlePresentBiomass} value={presentBiomass}></input>
+                  isSaved ? presentBiomass : <input type = "number" style={{width: "60px"}} onChange={handlePresentBiomass} value={presentBiomass}></input>
                 }
               </td>
               <td>
                 {
-                  isSaved ? <Button type = "submit" disabled  variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button> : 
-                  <Button type = "submit" onClick={saveRefData} variant = "success" className = "mx-2" size = "sm" style = {{width: "100px"}}>Save</Button>
+                  isSaved ? <Button type = "submit" disabled  variant = "success" className = "mx-2" size = "sm" style = {{width: "60px"}}>Save</Button> : 
+                  <Button type = "submit" onClick={saveRefData} variant = "success" className = "mx-2" size = "sm" style = {{width: "60px"}}>Save</Button>
                 }
 
               </td>
