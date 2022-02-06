@@ -13,9 +13,9 @@ const TrComponent = (props) => {
     const [harvestSize, setHarvestSize] = useState(0);
     const [presentBiomass, setPresentBiomass] = useState(0);
     const [fish, setFish] = useState('');
+    const [standradSize, setStandardSize] = useState(0);
     // eslint-disable-next-line no-unused-vars
     const [waterArea, setWaterArea] = useState(0);
-
     const [isSaved, setIsSaved] = useState(false);
 
 
@@ -50,6 +50,7 @@ const TrComponent = (props) => {
   }
 
   const saveRefData = () => {
+   
     let refObj = {
       fish,
       totalPc,
@@ -58,11 +59,14 @@ const TrComponent = (props) => {
       stockingDensity,
       totalWeight,
       harvestSize,
-      presentBiomass
+      presentBiomass,
+      standradSize
     };
     props.ChangedSpeciesRefObj(refObj);
     setIsSaved(true);
   }
+
+  
 
     useEffect(()=> {
       fetch('http://localhost:5000/species')
@@ -94,7 +98,6 @@ const TrComponent = (props) => {
       setPresentBiomass(newPresentBiomass)
   }, [totalWeight, waterArea]);
     return (
-    
           <tr>
               <td>{props.rowId}</td>
               <td>
@@ -130,7 +133,7 @@ const TrComponent = (props) => {
               </td>
               <td>
                 {
-                  <input type= "number" style={{width:"60px"}}/>
+                  isSaved ? standradSize : <input type= "number" style={{width:"60px"}} onChange={(e)=>{setStandardSize(e.target.value)}} value={standradSize}/>
                 }
               </td>
               <td>

@@ -21,6 +21,7 @@ const Solution = () => {
     const [tempSpeciesReferenceObj, setTempSpeciesReferenceObj] = useState([]);
     const [fish,setFish] = useState("");
     const [problem, setProblem] = useState("");
+    const [growth, setGrowth] = useState([]);
     
 
 
@@ -41,8 +42,10 @@ const Solution = () => {
     
 
     const handleSaveData = (obj) =>{
-
-      
+    let refWeight = "";
+    if(obj.standradSize){
+        refWeight = getRefWeight(obj.fish,obj.standradSize,age);
+    }
       const resObj = {
           ...obj,
           production,
@@ -52,6 +55,7 @@ const Solution = () => {
           feedingLayer,
           oxygendemand,
           harvestOxygenDemand,
+          refWeight,
           firstTableDataObj: {
               waterArea,
               waterDepth,
@@ -76,7 +80,12 @@ const Solution = () => {
         setTempSpeciesReferenceObj(newTempObj);
     }
 
-    console.log(tempSpeciesReferenceObj);
+    const getRefWeight = (fish,weight,age) => {
+         let filteredData = growth.filter(item => item.fishtype === fish && parseInt(item.age) === age);
+         if(filteredData.length)  return filteredData[0].bodyweight;
+        
+         return "no-ref";
+    }
 
     useEffect(()=>{
         fetch('http://localhost:5000/species-reference')
@@ -90,9 +99,12 @@ const Solution = () => {
         .then(data =>{
             setFeedingRateData(data);
         })
-    },[])
 
-    console.log(feedingRateData);
+        fetch('http://localhost:5000/database')
+        .then(res=>res.json())
+        .then(data =>setGrowth(data))
+
+    },[])
 
     useEffect(()=>{
         let oxygendemandSum = 0;
@@ -345,6 +357,8 @@ const Solution = () => {
                                 <th>Species</th>
                                 <th>Feed Type</th>
                                 <th>Total Feed(kg)</th>
+                                <th>Standard Weight</th>
+                                <th>Reference Weight</th>
                                 <th>Frequency</th>
                             </tr>
                         </thead>
@@ -357,6 +371,8 @@ const Solution = () => {
                                         <td>{item.fish}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}</td>
+                                        <td>{item.standradSize}</td>
+                                        <td>{item.refWeight}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).frequency}</td>
                                     </tr>
                                 ))                               
