@@ -156,7 +156,6 @@ const SpeciesReferenceData = () => {
                                             <th>Fish Age</th>
                                             <th>Water Area</th>
                                             <th>Water Depth</th>
-                                            <th>Stocking Quantity</th>
                                             <th>Water Volume</th>
                                             <th>O<sub>2</sub> Production</th>
                                             <th>O<sub>2</sub> Demand</th>
@@ -168,7 +167,6 @@ const SpeciesReferenceData = () => {
                                         <td>{tempModalData.age}</td>
                                         <td>{tempModalData.waterArea}</td>
                                         <td>{tempModalData.waterDepth}</td>
-                                        <td>{tempModalData.stockingQuantity}</td>
                                         <td>{tempModalData.volume}</td>
                                         <td>{tempModalData.production}</td>
                                         <td>{tempModalData.oxygendemand}</td>

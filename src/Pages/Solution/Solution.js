@@ -21,7 +21,7 @@ const Solution = () => {
     const [tempSpeciesReferenceObj, setTempSpeciesReferenceObj] = useState([]);
     const [fish,setFish] = useState("");
     const [problem, setProblem] = useState("");
-    const [stockingQuantity, setStockingQuantity] = useState(null);
+    
 
 
     //Table formula
@@ -58,7 +58,6 @@ const Solution = () => {
               volume,
               age,
               problem,
-              stockingQuantity,
               production,
               oxygendemand,
           }
@@ -131,14 +130,14 @@ const Solution = () => {
       },[]);
 
     useEffect(()=>{
-        let cubic = parseFloat("28.32").toFixed(2)
+        let cubic = parseFloat("120340.3").toFixed(2)
         let newVolume = waterArea * waterDepth * cubic
         setVolume(newVolume.toFixed(2))
     }, [waterArea, waterDepth])
     
     useEffect(() => {
-        let range = parseFloat("1.45830299").toFixed(2);
-        let cubic = parseFloat("28.32").toFixed(2)
+        let range = parseFloat("1.41959265").toFixed(2);
+        let cubic = parseFloat("12340.3").toFixed(2)
         let newVolume = waterArea * waterDepth * cubic
         setVolume(newVolume.toFixed(2))
         let oxygenProduction = newVolume* range
@@ -294,9 +293,9 @@ const Solution = () => {
                             <Form.Control type='number' placeholder='Culture Period (days)'></Form.Control>
                         </Form.Group>
                         
-                        <Form.Group as={Col} controlId="formGridStockingQuantity">
+                        {/* <Form.Group as={Col} controlId="formGridStockingQuantity">
                         <Form.Control type = "number" placeholder = "Stocking Quantity" value={stockingQuantity} onChange={(e) => setStockingQuantity(e.target.value)}/>
-                        </Form.Group>
+                        </Form.Group> */}
                         
                     </Row>
                     </Form>
@@ -370,7 +369,7 @@ const Solution = () => {
                     <div className=''>
                     <p><b>Species Name:</b> {fish} 
                     <br/>
-                    <b>The Water Volume is :</b> {volume} m<sup>3</sup>
+                    <b>The Water Volume is :</b> {volume} L
                     <br/>
                     <b>O<sub>2</sub> Production:</b> {production} mg/hr/L
                     <br/>
