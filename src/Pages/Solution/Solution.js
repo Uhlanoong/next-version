@@ -21,7 +21,6 @@ const Solution = () => {
     const [tempSpeciesReferenceObj, setTempSpeciesReferenceObj] = useState([]);
     const [fish,setFish] = useState("");
     const [problem, setProblem] = useState("");
-    const [growth, setGrowth] = useState([]);
     
 
 
@@ -100,9 +99,7 @@ const Solution = () => {
             setFeedingRateData(data);
         })
 
-        fetch('http://localhost:5000/database')
-        .then(res=>res.json())
-        .then(data =>setGrowth(data))
+       
 
     },[])
 
@@ -181,7 +178,10 @@ const Solution = () => {
     const CalculateAge = (inputDate) => {
       var diffInTime = new Date(inputDate).getTime() - new Date().getTime();
       var days = Math.ceil(diffInTime / (1000 * 3600 * 24));
+      localStorage.setItem('age',Math.abs(days));
+      localStorage.setItem('fish',species[0].fish);
       setAge(Math.abs(days));
+      
     //   return Math.abs(days);
     };
     const changeHandler = (e) => {
@@ -357,8 +357,6 @@ const Solution = () => {
                                 <th>Species</th>
                                 <th>Feed Type</th>
                                 <th>Total Feed(kg)</th>
-                                <th>Standard Weight</th>
-                                <th>Reference Weight</th>
                                 <th>Frequency</th>
                             </tr>
                         </thead>
@@ -371,8 +369,6 @@ const Solution = () => {
                                         <td>{item.fish}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).feedType}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).totalFeedingRate}</td>
-                                        <td>{item.standradSize}</td>
-                                        <td>{item.refWeight}</td>
                                         <td>{CalculateTotalFeed(item.fish,item.totalWeight,item.totalPc).frequency}</td>
                                     </tr>
                                 ))                               

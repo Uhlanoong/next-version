@@ -17,14 +17,20 @@ const TrComponent = (props) => {
     // eslint-disable-next-line no-unused-vars
     const [waterArea, setWaterArea] = useState(0);
     const [isSaved, setIsSaved] = useState(false);
+    const [growth, setGrowth] = useState([]);
+    const [age, setAge] = useState(0);
 
 
     const handleChange = ((e) => {
-        console.log(parseInt(e.target.value.split('-')[1]));
         setOptionValue(parseInt(e.target.value.split('-')[1]));
         setFish(e.target.value.split('-')[0])
         props.ChangedFish(e.target.value.split('-')[0])
         props.ChangedFeedingLayer(e.target.value.split('-')[2]);
+        localStorage.setItem('fish',e.target.value.split('-')[0]);
+        // let result =  getRefWeight(fish,age);
+        // if(result){
+        //   setStandardSize(result);
+        // }
     });
 
     const handleTotalPc = (e)=>{
@@ -66,6 +72,29 @@ const TrComponent = (props) => {
     setIsSaved(true);
   }
 
+  const getRefWeight = (fish,age) => {
+    let filteredData = growth.filter(item => item.fishtype === fish);  
+    let ageArr = [];
+    filteredData.forEach((item)=>{
+      ageArr.push(parseInt(item.age))
+    });
+    if(ageArr.length){
+      let goal = age;
+      let output = ageArr.reduce((prev, curr) => Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+      let result = filteredData.find((item) => parseInt(item.age) === output);
+      console.log(result);
+      if(result){
+        return parseInt(result.bodyweight);
+      }else{
+        return 'N/A'
+      }
+    }
+   
+    return 'N/A';
+}
+
+  
+
   
 
     useEffect(()=> {
@@ -74,8 +103,26 @@ const TrComponent = (props) => {
       .then(data =>{
         setSpecies(data);
       })
+
+      fetch('http://localhost:5000/database')
+      .then(res=>res.json())
+      .then(data =>setGrowth(data))
+
+      setAge(localStorage.getItem('age'));
+      setFish(localStorage.getItem('fish'));
       
-    },[props, species]);
+    },[props]);
+
+    // useEffect(()=>{
+    //   setFish(species[0].fish)
+    // },[species])
+
+    useEffect(()=>{
+      let result =  getRefWeight(fish,age);
+      if(result){
+        setStandardSize(result);
+      }
+    },[fish,age])
 
     useEffect(() => {
         let newTotalWeight = (totalPc * presentSize) /1000
@@ -89,13 +136,17 @@ const TrComponent = (props) => {
     }, [totalPc, harvestSize, optionValue, props])
 
     useEffect(() => {
-      let newStockingDensity = totalPc / waterArea
-      setStockingDensity(newStockingDensity)
+      if(waterArea){
+        let newStockingDensity = totalPc / waterArea
+        setStockingDensity(newStockingDensity)
+      }
    }, [totalPc, waterArea]);
     
     useEffect(() => {
-      let newPresentBiomass = totalWeight /waterArea
-      setPresentBiomass(newPresentBiomass)
+      if(waterArea){
+        let newPresentBiomass = totalWeight /waterArea
+        setPresentBiomass(newPresentBiomass)
+      }
   }, [totalWeight, waterArea]);
     return (
           <tr>
@@ -133,7 +184,7 @@ const TrComponent = (props) => {
               </td>
               <td>
                 {
-                  isSaved ? standradSize : <input type= "number" style={{width:"60px"}} onChange={(e)=>{setStandardSize(e.target.value)}} value={standradSize}/>
+                  isSaved ? standradSize : <input type= "number" style={{width:"60px"}} readOnly value={standradSize}/>
                 }
               </td>
               <td>
