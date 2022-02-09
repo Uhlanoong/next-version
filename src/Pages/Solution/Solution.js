@@ -41,10 +41,6 @@ const Solution = () => {
     
 
     const handleSaveData = (obj) =>{
-    let refWeight = "";
-    if(obj.standradSize){
-        refWeight = getRefWeight(obj.fish,obj.standradSize,age);
-    }
       const resObj = {
           ...obj,
           production,
@@ -54,7 +50,6 @@ const Solution = () => {
           feedingLayer,
           oxygendemand,
           harvestOxygenDemand,
-          refWeight,
           firstTableDataObj: {
               waterArea,
               waterDepth,
@@ -79,12 +74,12 @@ const Solution = () => {
         setTempSpeciesReferenceObj(newTempObj);
     }
 
-    const getRefWeight = (fish,weight,age) => {
-         let filteredData = growth.filter(item => item.fishtype === fish && parseInt(item.age) === age);
-         if(filteredData.length)  return filteredData[0].bodyweight;
+    // const getRefWeight = (fish,weight,age) => {
+    //      let filteredData = growth.filter(item => item.fishtype === fish && parseInt(item.age) === age);
+    //      if(filteredData.length)  return filteredData[0].bodyweight;
         
-         return "0";
-    }
+    //      return "0";
+    // }
 
     useEffect(()=>{
         fetch('http://localhost:5000/species-reference')
