@@ -125,9 +125,17 @@ const Solution = () => {
     const handleTotalPc = (e)=>{
         setTotalPc(e.target.value);
     }
-    const handleStockingDensity = (e)=>{
-        setStockingDensity(e.target.value);
+    const handleWaterAreaChange = (e)=>{
+        setWaterArea(e.target.value);
+        localStorage.setItem('water',e.target.value)
     }
+
+    const handlePresentBiomassChange = (e)=>{
+        setWaterArea(e.target.value);
+        localStorage.setItem('water',e.target.value)
+    }
+
+
     const handlePresentBiomass = (e)=>{
         setPresentBiomass(e.target.value)
     }
@@ -188,6 +196,8 @@ const Solution = () => {
       setData({ date: e.target.value });
       CalculateAge( e.target.value);
     };
+
+
 
     
 
@@ -262,7 +272,7 @@ const Solution = () => {
                         <textarea className="form-control" placeholder = "Problem" id="exampleFormControlTextarea1" rows="1" value={problem} onChange={(e) => setProblem(e.target.value)}></textarea>
                         </div>
                         <Form.Group as={Col} controlId="formGridWaterArea">
-                        <Form.Control type="number" placeholder="Water Area" onChange={(e)=>setWaterArea(e.target.value)}/>
+                        <Form.Control type="number" placeholder="Water Area" onChange={(e)=>handleWaterAreaChange(e)}/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridWaterDepth">
                         <Form.Control type="number" placeholder="Water Depth" onChange={(e)=>setWaterDepth(e.target.value)} />

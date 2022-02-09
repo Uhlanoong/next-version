@@ -43,7 +43,11 @@ const TrComponent = (props) => {
       setPresentSize(e.target.value);
   }
     const handleStockingDensity = (e)=>{
-        setStockingDensity(e.target.value);
+        let water = localStorage.getItem('water');
+        if(water){
+          let newStockingDensity = totalPc / parseInt(water);
+          setStockingDensity(newStockingDensity)
+        }
     }
     const handleTotalWeight = (e)=>{
       setTotalWeight(e.target.value);
@@ -52,8 +56,23 @@ const TrComponent = (props) => {
       setHarvestSize(e.target.value);
     }
     const handlePresentBiomass = (e)=>{
-      setPresentBiomass(e.target.value)
-  }
+      let water = localStorage.getItem('water');
+      if(water){
+        let newPresentBiomass = totalWeight /parseInt(water);
+        setPresentBiomass(newPresentBiomass)
+      }
+    }
+
+    useEffect((e) => {
+      let water = localStorage.getItem('water');
+      if(water){
+        let newPresentBiomass = totalWeight /parseInt(water);
+        setPresentBiomass(newPresentBiomass);
+
+        let newStockingDensity = totalPc / parseInt(water);
+        setStockingDensity(newStockingDensity)
+      }
+    },[totalPc,totalWeight])
 
   const saveRefData = () => {
    
