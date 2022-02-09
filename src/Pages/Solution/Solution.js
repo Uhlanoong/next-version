@@ -83,7 +83,7 @@ const Solution = () => {
          let filteredData = growth.filter(item => item.fishtype === fish && parseInt(item.age) === age);
          if(filteredData.length)  return filteredData[0].bodyweight;
         
-         return "no-ref";
+         return "0";
     }
 
     useEffect(()=>{
@@ -182,7 +182,6 @@ const Solution = () => {
       localStorage.setItem('fish',species[0].fish);
       setAge(Math.abs(days));
       
-    //   return Math.abs(days);
     };
     const changeHandler = (e) => {
       setData({ date: e.target.value });
@@ -304,10 +303,6 @@ const Solution = () => {
                         <Form.Group as = {Col}>
                             <Form.Control type='number' placeholder='Culture Period (days)'></Form.Control>
                         </Form.Group>
-                        
-                        {/* <Form.Group as={Col} controlId="formGridStockingQuantity">
-                        <Form.Control type = "number" placeholder = "Stocking Quantity" value={stockingQuantity} onChange={(e) => setStockingQuantity(e.target.value)}/>
-                        </Form.Group> */}
                         
                     </Row>
                     </Form>
