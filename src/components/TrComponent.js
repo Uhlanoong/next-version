@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -27,10 +28,6 @@ const TrComponent = (props) => {
         props.ChangedFish(e.target.value.split('-')[0])
         props.ChangedFeedingLayer(e.target.value.split('-')[2]);
         localStorage.setItem('fish',e.target.value.split('-')[0]);
-        // let result =  getRefWeight(fish,age);
-        // if(result){
-        //   setStandardSize(result);
-        // }
     });
 
     const handleTotalPc = (e)=>{
@@ -105,16 +102,12 @@ const TrComponent = (props) => {
       if(result){
         return parseInt(result.bodyweight);
       }else{
-        return 'N/A'
+        return '0'
       }
     }
    
-    return 'N/A';
+    return '0';
 }
-
-  
-
-  
 
     useEffect(()=> {
       fetch('http://localhost:5000/species')
@@ -132,16 +125,12 @@ const TrComponent = (props) => {
       
     },[props]);
 
-    // useEffect(()=>{
-    //   setFish(species[0].fish)
-    // },[species])
-
     useEffect(()=>{
       let result =  getRefWeight(fish,age);
       if(result){
         setStandardSize(result);
       }
-    },[fish,age])
+    },[fish, age])
 
     useEffect(() => {
         let newTotalWeight = (totalPc * presentSize) /1000
